@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<!--
+    create: 2023/9/20
+    author: Sally
+    update: 
+-->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HW1</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+    
+</head>
+
+<body>
+    <header>
+        <div class="page-title">Sally's Paradise</div>
+        <span class=menu-button onclick="" >&#9776;</span>
+    </header>
+    <script>
+        document.getElementsByTagName("header")[0].addEventListener("click", function () {
+            this.style.color = "black";
+            this.style.backgroundColor = "white"
+        })
+    </script>
+    <main class="wrapper">
+        <aside>
+            <h3>News!!</h3>
+            <p>今日睡眠: 6hr</p>
+            <p>9/25 19:30 交映一樓交大火舞體驗社課</p>
+        </aside>
+        <div class="content-box">
+            <h2>About Me</h2>
+            <div>
+                <img class="profilePhoto" src=".\DSC07537.jpg" title="我">
+            </div>
+            <dl>
+                <dt>姓名: 黃綵誼(Sally)</dt>
+                <dt>學號: 111613025</dt>
+            </dl>
+        </div>
+        <div class="content-box">
+            <h2>My Life</h2>
+            <div class="scroll-box">
+                <div class="life-picture">
+                    <img src="./DSC08092.jpg" title="交大火舞迎新茶會">
+                </div>
+                <div class="life-picture">
+                    <img src="./371672.jpg" title="雨山祭">
+                </div>
+                <div class="life-picture">
+                    <img src="./_MG_0512.JPG" title="材料x光電迎新宿營">
+                </div>
+                <div class="life-picture">
+                    <img src="./DSC04969.JPG" title="雄宿">
+                </div>
+                <div class="life-picture">
+                    <img src="./371681.JPG" title="民吉台東行">
+                </div>
+                <div class="life-picture">
+                    <img src="./371680.JPG" title="貓咪">
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        <div class="content-box">
+            <h2>上課心得</h2>
+            <div class="content-box-a">
+                滿酷的，竟然還可以自己訂座標寫功能，不知道會不會學到node.js，對資料庫有點興趣，不過單純寫網頁寫遊戲感覺也很不錯玩。
+            </div>
+        </div>
+        <div class="content-box">
+            <h2>美食地圖</h2>
+            <form action="clickMap.js" method="post" name="clickPosition">
+                <input class="HsinchuMap" name="buttonMap" type="image" src="./HsinchuFood.jpg">
+            </form>
+            
+            <map id="Hsinchu" name="Hsinchu">
+                <area shape="rect" coords="435,100,520,180" href="https://maps.app.goo.gl/QjPSsJ5C7MLpJpEm6" alt="西大發包子" title="西大發包子">
+            </map>
+            <figure>
+                <img class="HsinchuMap" src=".\HsinchuFood.jpg" usemap="#Hsinchu" alt="新竹地圖">
+                <figcaption>新竹美食地圖</figcaption>
+            </figure>
+        </div>
+    </main>
+    <footer class="sub-footer">
+        <p>Contact Me</p>
+        <div class="contact-info">
+            <a href="mailto:sallyh.en11@nycu.edu.tw"><img class="contact-icon" src="./email-icon.png"></a>
+            <a href="https://www.facebook.com/sallyhuang0812"><img class="contact-icon" src="./FB-icon.png"></a>
+            <a href="https://www.instagram.com/sallyhuang0812/"><img class="contact-icon" src="./IG-icon.png"></a>
+        </div>
+        <p>&copy 2023版權所有翻印必究</p>
+    </footer>
+
+</body>
+
+</html>
