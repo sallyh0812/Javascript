@@ -13,25 +13,25 @@
     <title>HW1</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="./style.css">
-    
+
 </head>
 
 <body>
     <header>
         <div class="page-title">Sally's Paradise</div>
-        <span class=menu-button onclick="" >&#9776;</span>
+        <span class=menu-button onclick="">&#9776;</span>
     </header>
     <script>
         document.getElementsByTagName("header")[0].addEventListener("click", function () {
             this.style.color = "black";
-            this.style.backgroundColor = "white"
+            this.style.backgroundColor = "white";
         })
     </script>
     <main class="wrapper">
         <aside>
             <h3>News!!</h3>
-            <p>今日睡眠: 6hr</p>
-            <p>9/25 19:30 交映一樓交大火舞體驗社課</p>
+            <p>中秋節快樂</p>
+            <p>留言板</p>
         </aside>
         <div class="content-box">
             <h2>About Me</h2>
@@ -64,9 +64,6 @@
                 <div class="life-picture">
                     <img src="./371680.JPG" title="貓咪">
                 </div>
-                
-                
-                
             </div>
         </div>
         <div class="content-box">
@@ -77,17 +74,23 @@
         </div>
         <div class="content-box">
             <h2>美食地圖</h2>
-            <form action="clickMap.js" method="post" name="clickPosition">
-                <input class="HsinchuMap" name="buttonMap" type="image" src="./HsinchuFood.jpg">
+            <form id="form" action="http://localhost:3000/getPosition" method="get">
+                <p>click the image to get the position</p>
+                <input type="image" id="formField" class="HsinchuMap" src="./HsinchuFood.jpg">
             </form>
+            <!-- <form method="post" enctype="multipart/form-data" action="">
+                <input type="file" name="afile[]" multiple="multiple">
+                <input type="submit">
+            </form> -->
             
-            <map id="Hsinchu" name="Hsinchu">
-                <area shape="rect" coords="435,100,520,180" href="https://maps.app.goo.gl/QjPSsJ5C7MLpJpEm6" alt="西大發包子" title="西大發包子">
+            <!-- <map id="Hsinchu" name="Hsinchu">
+                <area shape="rect" coords="435,100,520,180" href="https://maps.app.goo.gl/QjPSsJ5C7MLpJpEm6"
+                    alt="西大發包子" title="西大發包子">
             </map>
             <figure>
                 <img class="HsinchuMap" src=".\HsinchuFood.jpg" usemap="#Hsinchu" alt="新竹地圖">
                 <figcaption>新竹美食地圖</figcaption>
-            </figure>
+            </figure> -->
         </div>
     </main>
     <footer class="sub-footer">
