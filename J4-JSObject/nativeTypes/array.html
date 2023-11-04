@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<body>
+<h2 align=center>陣列的使用</h2>
+<hr>
+<script>
+//myArray=new Array("Mon", "Tue", "Wed");
+myArray=["Mon", "Tue", "Wed"];
+
+// 控制台/地區與語言選項/地區選項/自訂/清單分隔字元
+// 2012.11.6 - IE: support, Chrome,Firefox: no 
+document.write("myArray.toLocaleString() = " + myArray.toLocaleString() + "<br>");
+
+// The valueOf() method returns the array.
+document.write("myArray.valueOf() = " + myArray.valueOf() + "<br>");
+document.write((myArray.valueOf())[0]); // Mon
+
+document.write(typeof myArray); // object
+document.write(myArray instanceof Array ); // returns true
+</script>
+
+<hr>
+</body>
+</html>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+h3 {font-size: 2em; color:red;}
+</style>
+</head>
+<body>
+<h2 align="center">陣列簡介</h2>
+<hr>
+<h3>
+<script>
+myArray = new Array();			// 產生一個空的陣列
+myArray[0] = 2;		// 加入第 1 個元素 
+myArray[1] = 10;	// 加入第 2 個元素 
+myArray[2] = 13;	// 加入第 3 個元素 
+myArray[3] = 18;	// 加入第 4 個元素 
+myArray[4] = 22;	// 加入第 5 個元素 
+myArray[5] = 37;	// 加入第 6 個元素 
+document.writeln(myArray[0]+", "+myArray[1]+", "+myArray[2]+", "+myArray[3]+", "+myArray[4]+", "+myArray[5]+"<br>");
+document.writeln("myArray[0] = " + myArray[0] + ", ");
+document.writeln("myArray[1] = " + myArray[1] + "<br>");
+document.writeln("myArray[2] = " + myArray[2] + ", ");
+document.writeln("myArray[3] = " + myArray[3] + "<br>");
+document.writeln("myArray[4] = " + myArray[4] + ", ");
+document.writeln("myArray[5] = " + myArray[5] + "<br>");
+</script>
+</h3>
+<hr>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<script>
+	class Person {
+		constructor(name) {
+			this.name = name;
+		}
+		getName() {
+			return this.name;
+		}
+	}
+	class Student extends Person {
+		constructor(name, id) {
+			super(name);
+			this.id = id;
+		}
+		display() {
+			return "****"+super.getName()+"****"+this.id;
+		}
+	}
+	
+	var student = new Student("Adam", "2011001");
+	console.log(student.getName());
+	delete Student.prototype.getName;
+	console.log(student.getName());
+</script>

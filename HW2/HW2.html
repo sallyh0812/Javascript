@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<!--
+    create: 2023/9/20
+    author: Sally
+    update: 
+-->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HW2</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/09e6c76b45.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section id="cover">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="page-title"><a href="#" class="navbar-brand">Sally's Paradise</a></div>
+                <button class="navbar-toggler" type="button" onclick="openNav()">
+                    <i class="navbar-toggler-icon fa fa-bars"></i>
+                </button>
+                <div class="navbar-collapse" id="navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link">Home</a>
+                        <li class="nav-item"><a href="#about-me" class="nav-link">About Me</a>
+                            <ul>
+                                <li><a href="#about-me" class="nav-link">My profile</a>
+                                </li>
+                                <li><a href="#my-life" class="nav-link">My life</a>
+                                </li>
+                                <li><a href="#my-music" class="nav-link">My music</a>
+                                </li>
+                                <li><a href="#my-food" class="nav-link">My food</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#project" class="nav-link">Project</a>
+                            <ul>
+                                <li><a href="#" class="nav-link">流動小攤系統</a>
+                                </li>
+                                <li><a href="#" class="nav-link">物聯網寵物飼養機</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a href="#find-me" class="nav-link">Find me!</a>
+                        </li>
+                        <li class="nav-item"><a href="#contact-me" class="nav-link">Contact me</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </section>
+    <section id="about-me" class="padding-top-bottom">
+        <div class="row content-box">
+            <div class="col">
+                <h2>About Me</h2>
+                <div class="row">
+                    <div class="col-3 col-pic">
+                        <img class="profilePhoto" src=".\DSC07537.jpg" title="我">
+                    </div>
+                    <div class="col-3">
+                        <p>姓名: 黃綵誼(Sally)</p>
+                        <p>學號: 111613025</p>
+                        <p>MBTI: ENTP</p>
+                        <p>興趣: 各種球類運動、西洋棋、聽團、吉他...</p>
+
+                    </div>
+                    <div class="col-3">
+                        <dl>學歷:
+                            <dd>高雄女中 畢業</dd>
+                            <dd>陽明交大 材料與工程科學系大二</dd>
+                        </dl>
+                        <dl>其他經歷:
+                            <dd>雄女民吉社 教學</dd>
+                            <dd>五校民吉聯合迎新 活動長</dd>
+                            <dd>五校民吉聯合春訓 總召</dd>
+                            <dd>交大火舞社 總務</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row content-box">
+            <div class="col-3" id="my-life">
+                <h2>My Life</h2>
+                <div class="scroll-box">
+                    <div class="life-picture">
+                        <img src="life/DSC08092.jpg" title="交大火舞迎新茶會">
+                    </div>
+                    <div class="life-picture">
+                        <img src="life/371672.jpg" title="雨山祭">
+                    </div>
+                    <div class="life-picture">
+                        <img src="life/_MG_0512.JPG" title="材料x光電迎新宿營">
+                    </div>
+                    <div class="life-picture">
+                        <img src="life/DSC04969.JPG" title="雄宿">
+                    </div>
+                    <div class="life-picture">
+                        <img src="life/371681.JPG" title="民吉台東行">
+                    </div>
+                    <div class="life-picture">
+                        <img src="life/371680.JPG" title="貓咪">
+                    </div>
+                </div>
+            </div>
+            <div class="col-3" id="my-music">
+                <h2>My Music</h2>
+                <div class="scroll-box">
+                    <iframe style="border-radius:12px"
+                        src="https://open.spotify.com/embed/track/3vZhE3c7xdRlutAIPYnJww?utm_source=generator"
+                        class="music-iframe" frameBorder="0" allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                    <iframe style="border-radius:12px"
+                        src="https://open.spotify.com/embed/track/4RDEVasHPf6KH7yTCjpL47?utm_source=generator"
+                        class="music-iframe" frameBorder="0" allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                    <iframe style="border-radius:12px"
+                        src="https://open.spotify.com/embed/track/6F5g1yFmUKpkfReh5KEVz4?utm_source=generator"
+                        class="music-iframe" frameBorder="0" allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                    <iframe style="border-radius:12px"
+                        src="https://open.spotify.com/embed/track/0jBK8HitEXpVnm119c6tJG?utm_source=generator"
+                        class="music-iframe" frameBorder="0" allowfullscreen=""
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="col-3" id="my-food">
+                <h2>My Food</h2>
+                <div class="scroll-box">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="find-me" class="padding-top-bottom">
+        <div class="row content-box">
+            <div class="col">
+                <h2>Find Me!</h2>
+                <p>Find me in the picture! See how far you can go~ (more suitable on edge, make sure to click on my face)</p>
+            </div>
+        </div>
+        <div class="row content-box">
+            <div class="col col-map">
+                <img class="my-map" id="findme-map" src="./380891.jpg" usemap="#My-map" alt="find-me"
+                    onclick="find_wrong()">
+                <map id="My-map">
+                    <area shape="rect" coords="445,420,465,450" onclick="find_correct1()">
+                </map>
+            </div>
+        </div>
+    </section>
+    <section id="project" class="padding-top-bottom">
+        <div class="row content-box">
+            <div class="col">
+                <h2>Project</h2>
+            </div>
+        </div>
+        <div class="row content-box">
+            <div class="col-5">
+                <h2>物聯網寵物飼養機</h2>
+            </div>
+            <div class="col-5">
+                <h2>流動小攤系統</h2>
+            </div>
+        </div>
+    </section>
+    <section id="contact-me" class="padding-top-bottom footer">
+        <div class="row content-box">
+            <div class="col">
+                <h2>Contact me</h2>
+            </div>
+        </div>
+        <div class="row content-box">
+            <div class="col contact-info">
+                <a href="mailto:sallyh.en11@nycu.edu.tw"><img class="contact-icon" src="./email-icon.png"></a>
+                <a href="https://www.facebook.com/sallyhuang0812"><img class="contact-icon" src="./FB-icon.png"></a>
+                <a href="https://www.instagram.com/sallyhuang0812/"><img class="contact-icon" src="./IG-icon.png"></a>
+            </div>
+        </div>
+        <div class="row content-box">
+            <div class="col">
+                <p>&copy 2023版權所有翻印必究</p>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script src="HW2.js"></script>
+
+</html>

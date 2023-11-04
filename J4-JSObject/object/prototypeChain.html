@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prototype Chaining</title>
+<script type="text/javascript">
+					
+	function Person(name = 'Adam') {
+		this.name = name;
+	}
+	Person.prototype.getName = function(){return this.name;};
+
+	function Student(name, id){
+		//this.name = name;
+		Person.call(this, name);
+		this.id = id;
+	}
+	
+	//inherit from Person
+	Student.prototype = new Person();
+	console.log(Student.prototype.getName()); //Adam
+
+	var inst = new Student("Eve","9911001");
+	console.log(inst.getName());   // "Eve"
+	console.log(inst instanceof Student);  // true
+	console.log(inst instanceof Person); // true
+	console.log(inst instanceof Object); // true
+	console.log(inst instanceof Function); // false  <-- 
+	console.log(Student instanceof Function); // true
+	
+	console.log(Student.prototype.isPrototypeOf(inst)); //true
+	console.log(Person.prototype.isPrototypeOf(inst)); //true
+	console.log(Object.prototype.isPrototypeOf(inst)); //true
+	console.log(Function.prototype.isPrototypeOf(inst)); //false  <--
+	console.log(Function.prototype.isPrototypeOf(Student)); //true
+
+	//override existing method
+	Student.prototype.getName = function (){
+		return this.id;
+	};
+	console.log(inst.getName());   // "9911001"
+	delete Student.prototype.getName;
+	console.log(inst.getName());   // "Eve"
+</script>
+</head>
+</html>

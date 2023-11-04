@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<script>
+console.log("與數字物件（Number）相關的常數與函式的測試");
+console.log("The value returned by \"isNaN(Nan)\" is \"" + isNaN(NaN) + "\"<br>");
+console.log("The value returned by \"NaN==NaN\" is \"" + (NaN==NaN) + "\"<br>");
+console.log("Number.MIN_VALUE = " + Number.MIN_VALUE + "<br>");
+console.log("Number.MAX_VALUE = " + Number.MAX_VALUE + "<br>");
+console.log("Number.NEGATIVE_INFINITY = " + Number.NEGATIVE_INFINITY + "<br>");
+console.log("Number.POSITIVE_INFINITY = " + Number.POSITIVE_INFINITY + "<br>");
+console.log("Number.NaN = " + Number.NaN + "<br>");
+console.log('Number(true) : ' + Number(true) +"<br>");
+console.log('Number(false) : ' + Number(false) +"<br>");
+console.log('Number(null) : ' + Number(null) +"<br>");
+console.log('Number("011") : ' + Number("011") + "<br>");
+console.log('Number("0xf") : ' + Number("0xf") +"<br>");
+console.log('Number("string") : ' + Number("string") +"<br>");
+console.log('Number("") : ' + Number("") +"<br>");
+
+x=5.238e+6;
+console.log("x=" + x + ", x.toFixed(4)="+x.toFixed(4)+"<br>");
+x=123456789;
+console.log("x=" + x + ", x.toExponential(3)="+x.toExponential(3)+"<br>");
+x=1234.56789;
+console.log("x=" + x + ", x.toPrecision(5)="+x.toPrecision(5)+"<br>");
+
+// Big Int
+let a = 9007199254740992+1;
+console.log(a);
+let b = 9007199254740992n+1n;
+console.log(b);
+let c = BigInt("9007199254740992")+1n;
+console.log(c);
+console.log(c.valueOf());
+console.log(123n+1n);
+console.log(Number(123n)+1);
+
+
+console.log(BigInt.asIntN(64, c));
+console.log(BigInt.asIntN(32, c));
+console.log(BigInt.asIntN(32, 2147483648n));
+
+// 
+</script>
+<hr>
+</body>
+</html>
