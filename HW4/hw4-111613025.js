@@ -23,12 +23,12 @@ class Calendar {
         }
         //console.log(year,month);
 
-        let day = (new Date(year, month - 1, 1)).getDay()
+        let day = (new Date(year, month-1, 1)).getDay()
         //0:Sunday 6: Saturday
 
-        let amountDays = new Date(new Date(year, (month) % 12, 1) - 1).getDate();
+        let amountDays = new Date(new Date(year, (month) % 12, 1)- 1).getDate();
         //the first date of next month - 1 = the last date of this month
-
+        
         //the title for calendar(year, month, day)
         out += `<table>
                     <tr><td colspan='7' class='table-title'>${year} 年 ${month} 月</td></tr>
@@ -56,6 +56,6 @@ class Calendar {
 let todayCal = new Calendar();
 document.write(todayCal.html()); //calendar for current month
 
-let cal = new Calendar(2023, 12);
+let cal = new Calendar(2023,12);
 document.write(cal.html()); //calendar for 2023,12
-document.write(cal.html(2004, 8)); //calendar for 2004,8
+document.write(cal.html(2004,8)); //calendar for 2004,8
