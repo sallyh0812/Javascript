@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<script>
+		function sayHi() { 
+			console.log('<button id="btn1" onclick="sayHi();">'); 
+		}
+	</script>
+</head>
+<body>
+	<button id="btn1" onclick="sayHi()">請按我(直接定義在標籤上)</button>
+	<button id="btn2">請按我(使用 addEventListener 定義)</button>
+	<script>
+		function sayHello() { 
+			console.log('<button id="btn2">');
+		}
+		var btn = document.getElementById("btn2");
+		btn.addEventListener( "click", sayHello);
+	</script>
+</body>
+</html>

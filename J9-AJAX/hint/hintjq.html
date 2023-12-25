@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+//$(document).ready(function(){
+$(function() {
+	$("#key").keyup(function(event) {
+		var str = this.value;
+		if (str.length==0) {
+			document.getElementById("txtHint").innerHTML="";
+		} else {
+			$.ajax({
+				url: "/name",
+				type: 'GET',
+				data:{key:str}, // key=el
+				dataType: "text",
+				success: function(res) {
+					$("#txtHint").text(res); // res == ajax.responseText
+				}
+			});
+		}
+	});
+});
+</script>
+</head>
+<body>
+<form>
+First Name: <input id="key" name="key" type="text" />
+</form>
+<p>Suggestions: <span id="txtHint"></span></p>
+</body>
+</html>

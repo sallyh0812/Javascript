@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body style="text-align:center;">
+<h2>Digital Clock</h2>
+<hr>
+<form name="theForm">
+<div>
+	clock initiated by setTimeout():<span id="clock1">00:00:00</span>
+	<input type="button" value="停止時鐘" onClick="clearTimeout(clock1)">
+</div>
+<div>
+	clock initiated by setInterval():<span id="clock2">00:00:00</span>
+	<input type="button" value="停止時鐘" onClick="clearInterval(clock2)">
+</div>
+<hr>
+</form>
+<script>
+var clock1;
+function displayClock1() {
+	document.getElementById("clock1").textContent = new Date().toLocaleString(); // innerText
+	clock1 = setTimeout(displayClock1, 1000);
+}
+displayClock1();
+
+function displayClock2() {
+	document.getElementById("clock2").textContent = new Date().toLocaleString();
+}
+var clock2 = setInterval(displayClock2, 1000); 
+
+/*
+function showTime(){
+	var d = new Date();
+	var h = d.getHours();
+	var m = d.getMinutes();
+	var s = d.getSeconds();
+	if ( h < 12) { a = "AM"; if ( h == 0) h = 12; }
+	else { a = "PM"; h = h - 12; }
+	//a = (hours >= 12) ? "下午 " : "上午 ";
+	//a += ((h > 12) ? h - 12 : h) + " 點";
+	//a += ((m < 10) ? " 0" : " ") + m + " 分";
+	//a += ((s < 10) ? " 0" : " ") + s + " 秒";
+	return (h + ":" + m + ":" + s+ " " + a);
+}
+*/
+</script>
+</body>
+</html>

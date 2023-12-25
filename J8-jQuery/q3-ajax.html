@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>DOM manipulation</title>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+></script>
+<script>
+$(document).ready(function () {
+	//document.getElementById("output").innerHTML = 
+	//"元素個數: " + document.getElementsByTagName("li").length;
+	//$('#output').load("https://www.pilio.idv.tw/lto/list.asp?indexpage=2&orderby=new table.auto-style1", function(responseText) {
+	//$('#output').load("q3-DOM.html", function(responseText, status, xhr) {
+	var ajax = new XMLHttpRequest();
+	var url = 'https://www.pilio.idv.tw/lto/list.asp?indexpage=2&orderby=new';
+	if (ajax) {    
+		ajax.open('GET', url, true);
+		ajax.onreadystatechange = function(){
+			alert("asdf");
+		};
+		ajax.send(); 
+	}
+	//$('#output').append('<br><b>第一個清單值是: </b>');
+	//$('#output').text($("li").get(i).text());
+	//$("li").get(i).innerText = "test";
+});
+</script>
+</head>
+<body>
+	<div id="output"></div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+    height: 92vb;
+}
+
+body {
+    margin: 20px;
+    background-color: rgb(255, 255, 255);
+    /* 替換成您的背景圖片URL */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    /*background-color: black;*/
+    height: 100%;
+    color: black;
+    transition: background-color 0.5s ease;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    height: -webkit-fill-available;
+}
+
+#playarea {
+    display: flex;
+    flex-direction: column;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+#keyboard {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 600px;
+}
+
+.keyboard-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+.letter-row {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    min-height: 46px;
+    margin: 2px;
+    background-color: rgba(178, 178, 178, 0.485);
+    /*border: 1px solid rgb(144, 144, 144);*/
+    border-radius: 5px;
+    padding: 5px;
+    flex: 1 1;
+}
+
+.letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    width: 56px;
+    height: 56px;
+    border-radius: 5px;
+    margin: 2px;
+    background-color: rgba(212, 212, 212, 0.141);
+    border: solid rgb(211, 211, 211) 2px;
+    text-align: center;
+    padding: 5px;
+    transition: background-color 0.2s ease-in;
+}
+
+#playarea {
+    display: flex;
+    flex-direction: column;
+}
+
+/*green > yellow > darkgray*/
+.darkgray {
+    background-color: rgba(89, 89, 89, 0.514);
+    color: white;
+    border: none;
+}
+
+.yellow {
+    background-color: rgba(255, 188, 31, 0.871);
+    color: white;
+    border: none;
+}
+
+.green {
+    background-color: rgba(6, 165, 17, 0.82);
+    color: white;
+    border: none;
+}
+
+#msgbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2em;
+    border: 3px rgb(142, 142, 142) solid;
+    border-radius: 5px;
+    text-align: center;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    background-color: rgb(239, 239, 239);
+    visibility: hidden;
+    padding: 30px;
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 12px 40px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode #msgbox{
+    background-color: black;
+    box-shadow: 0px 8px 16px 0px rgba(224, 224, 224, 0.4), 0 12px 40px 0 rgba(224, 224, 224, 0.2);
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.btn {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    min-width: 120px;
+    margin: 10px;
+    padding: 10px 20px 10px 20px;
+    background-color: rgba(192, 192, 192, 0.434);
+    border: 1px solid rgb(139, 139, 139);
+    border-radius: 3px;
+}
+
+@keyframes PopIn {
+    0% {
+        transform: scale(.8);
+        opacity: 0;
+    }
+    40% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+.letter[animation=pop]{
+    animation-name: PopIn;
+    animation-duration: 300ms;
+}
+
+.letter.filled {
+    border-color: #8e8e8e;
+}
+.dark-mode .letter{
+    border-color: #8e8e8e;
+}
+
+.dark-mode .letter.filled {
+    border-color: rgb(211, 211, 211);
+}
+
+@keyframes FlipIn {
+    0% {
+        transform: rotateX(0);
+    }
+
+    100% {
+        transform: rotateX(-90deg);
+    }
+}
+.letter[animation=flip-in]{
+    animation-name: FlipIn;
+    animation-duration: 200ms;
+    animation-timing-function: ease-in;
+}
+
+.letter[data-animation=flip-out]{
+    animation-name: FlipOut;
+    animation-duration: 100ms;
+    animation-timing-function: ease-in;
+}
+
+@keyframes FlipOut {
+    0% {
+        transform: rotateX(-90deg)
+    }
+
+    100% {
+        transform: rotateX(0)
+    }
+}

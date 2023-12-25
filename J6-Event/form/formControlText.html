@@ -1,0 +1,64 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+function eventHandler(e) {
+	e = e || window.event;
+	//document.getElementById("text2").value = document.getElementById("text1").value;
+	this.form.text2.value = this.form.text1.value;
+}
+//window.onload = function () {
+window.addEventListener("load", function () {
+	document.getElementById("btnClick").addEventListener("click", eventHandler);
+});
+</script></head>
+<body>
+<h2>傳送兩個文字欄位的訊息</h2>
+<hr>
+<form name="theForm">
+	<input type="text" name="text1" id="text1" value="送到右邊的預設訊息">
+	<input id="btnClick" type="button" value="=====>"> 
+	<!--
+	onClick="this.form.text2.value=this.form.text1.value;"
+	-->
+	<input type="text" name="text2" id="text2">
+	<br>(可利用 this.form 或 document.forms[0])
+
+	<!--input type="button" value="=====>" onClick="test();"-->
+	
+	<!--input type="button" value="=====>" onClick="document.forms[0].text2.value=document.forms[0].text1.value"-->
+
+	<br><br>
+	<input type="text" name="txbString" value="送到狀態列的預設訊息">
+	<input type="button" value="送到狀態列"
+	onClick=`this.form.text2.value=document.theForm.txbString.value`>
+	<br><br>
+	<input type="text" value="送到狀態列的預設訊息"
+	onchange="this.form.text2.value=this.value">
+	(使用 onChange 事件)
+	<br><br>
+	<input type="text" value="送到狀態列的預設訊息"
+	onkeyup="this.form.text2.value=this.value">
+	(使用 onkeyup 事件)
+	<br><br>
+	<input type="text" value="送到狀態列的預設訊息"
+	onkeypress="this.form.text2.value=this.value">
+	(使用 onKeyPress 事件)
+	<!--"this.form.text2.value+=String.fromCharCode(event.which+1)-->
+</form>
+<script>
+function eventHandler() {
+	//document.getElementById("text2").value = document.getElementById("text1").value;
+	this.form.text2.value = this.form.text1.value;
+}
+document.getElementById("btnClick").addEventListener("click", eventHandler);
+
+</script>
+<script>
+var o = document.getElementsByName("theForm")[0];
+for (var prop in o)
+  document.writeln('document.formName. '+prop+' = '+o[prop]+'<br>');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+body {text-align:center;}
+</style>
+<script>
+
+window.addEventListener("load", function() {
+	var form = document.getElementsByTagName("form")[0];
+	form.addEventListener("click", function() {
+		var msg="", i;
+		var g = document.getElementsByName("gender");
+		if (g[0].checked) msg += "hi, 帥哥";
+		else if (g[1].checked) msg += "hi, 美女";
+		
+		msg += "\n\n  你的興趣是: "
+		var h = document.getElementsByName("hobby");
+		var oBall = document.getElementsByName("ball");
+		for (i=0, flag=false; i<oBall.length; i++) {
+			flag = flag || oBall[i].checked;
+		}
+		h[0].checked = flag;
+		
+		for (i=0; i<h.length; i++) {
+			if (h[i].checked) msg+=" "+h[i].value;
+		}
+		
+		document.getElementById("message").innerText = msg;		
+	});
+});
+</script>
+</head>
+<body>
+<h2>擷取表單內元件：使用 this.form</h2>
+<hr>
+<form>
+	<input type="radio" name="gender">男&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="gender">女<br>
+	<br>
+	<input type="checkbox" name="hobby" value="打球">打球&nbsp;&nbsp;&nbsp;(
+		<input type="checkbox" name="ball" value="籃球">籃球&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="ball" value="棒球">棒球&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="ball" value="足球">足球)<br><br>
+		<!-- IE only fires the onchange event when the checkbox loses the focus (onblur). -->
+	<input type="checkbox" name="hobby" value="chess">下棋&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="hobby" value="閱讀">閱讀&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="hobby" value="上網">上網&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="hobby" value="聽音樂">聽音樂<br>
+	<br>
+</form>
+<div id="message"></div>
+</body>
+</html>

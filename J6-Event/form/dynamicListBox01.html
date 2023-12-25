@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+window.addEventListener("load", function() {
+	document.getElementById("btnInsert").addEventListener("click", function(e){
+		var week  = document.getElementById("week");
+		var index = week.options.length;
+		var text  = document.getElementById("theText").value;
+		var value  = document.getElementById("theValue").value;
+		week.options[index]=new Option(text, value);
+		week.selectedIndex=index;	
+	});
+
+	document.getElementById("btnDelete").addEventListener("click", function(e){
+		var week  = document.getElementById("week");
+		var index = week.selectedIndex;
+		if (index>=0) {
+			console.log(week.options.length);
+			week.options[index]=undefined;
+			console.log(week.options.length);
+		} else {
+			alert("無反白選項！");
+		}	
+	});
+});
+</script>
+</head>
+<body>
+<h2 align=center>動態下拉式選單：增加選項與刪除選項</h2>
+<hr>
+<form>
+<select id="week" size="5">
+	<option value="星期一">Monday
+	<option value="星期三">Wednesday
+	<option value="星期五">Friday
+	<option value="星期日">Sunday
+</select>
+<p>
+<input id="btnDelete" type="button" value="刪除反白選項"><br>
+<input id="btnInsert" type="button" value="增加右列選項">
+Text: <input type="text" name="theText" id="theText" value="Tuesday">
+Value: <input type="text" name="theValue" id="theValue" value="星期二">
+</form>
+<hr>
+</body>
+</html>

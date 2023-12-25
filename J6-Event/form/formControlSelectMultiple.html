@@ -1,0 +1,40 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+window.addEventListener("load", function() {
+	document.getElementById("courseList").addEventListener("change", function(){
+		let i, result = "";
+		for (i=0; i<this.options.length; i++) {
+			if (this.options[i].selected) {
+				result = result + this.options[i].text + "\n"; 
+			}
+		}
+		document.getElementById('message').innerText = 
+			"你最喜歡的幾門課是：\n" + result;
+	});
+});
+</script>
+</head>
+<body>
+<h2 style="text-align:center">下拉選單：多選</h2>
+<hr>
+請選擇你最喜歡的幾門課（可用 Ctrl 或 Shift 鍵來進行多選）：
+<form>
+<select id="courseList" name="courseList" size="8" multiple>
+	<option> 1. Linear Algebra
+	<option> 2. C Programming Language
+	<option> 3. Engineering Mathematics
+	<option selected> 4. Numerical Methods
+	<option> 5. Introduction to Artificial Intelligence
+	<option selected> 6. Web Programming
+	<option> 7. Artificial Neural Networks
+	<option> 8. Fuzzy Sets Theory and Applications
+	<option> 9. Audio Signal Processing and Recognition
+	<option> 10. Special Topics on MATLAB
+</select>
+</form>
+<div id="message"></div>
+<hr>
+</body>
+</html>

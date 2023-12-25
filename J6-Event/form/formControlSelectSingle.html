@@ -1,0 +1,36 @@
+﻿<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script>
+window.addEventListener("load", function(e){
+	e = e || window.event;
+	document.getElementById("courseList").addEventListener("change", function (e) {
+		document.getElementById('message').innerText = 
+		'你選的課程是「'+this.options[this.selectedIndex].text+'」';
+	});
+});
+</script>
+</head>
+<body>
+<h2 align=center>下拉選單：單選</h2>
+<hr>
+
+請選一個你最喜歡的課程：
+<form>
+<select id="courseList" name="courseList" size="8">
+	<option value="1021"> 1. Linear Algebra</option>
+	<option> 2. C Programming Language</option>
+	<option> 3. Engineering Mathematics</option>
+	<option> 4. Numerical Methods</option>
+	<option> 5. Introduction to Artificial Intelligence</option>
+	<option selected> 6. Web Programming</option>
+	<option> 7. Artificial Neural Networks</option>
+	<option> 8. Fuzzy Sets Theory and Applications</option>
+	<option> 9. Audio Signal Processing and Recognition</option>
+	<option> 10. Special Topics on MATLAB</option>
+</select>
+</form>
+<div id="message"></div>
+<hr>
+</body>
+</html>
