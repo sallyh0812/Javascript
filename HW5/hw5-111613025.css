@@ -68,12 +68,18 @@ body {
     justify-content: center;
     font-size: 17px;
     min-height: 46px;
-    margin: 2px;
+    margin: 4px;
     background-color: rgba(178, 178, 178, 0.485);
     /*border: 1px solid rgb(144, 144, 144);*/
     border-radius: 5px;
     padding: 5px;
     flex: 1 1;
+    cursor: pointer;
+    box-shadow: 2px 2px 2px 1px rgba(33, 33, 33, 0.339);
+}
+
+.dark-mode .key{
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 255, 0.458);
 }
 
 .letter {
@@ -145,6 +151,7 @@ body {
 }
 
 .btn {
+    cursor: pointer;
     display: flex;
     text-align: center;
     align-items: center;
@@ -156,6 +163,10 @@ body {
     background-color: rgba(192, 192, 192, 0.434);
     border: 1px solid rgb(139, 139, 139);
     border-radius: 3px;
+}
+
+.key:hover{
+    transform: scale(1.1);
 }
 
 @keyframes PopIn {
@@ -170,6 +181,11 @@ body {
 }
 
 .letter[animation=pop]{
+    animation-name: PopIn;
+    animation-duration: 300ms;
+}
+
+.key[animation=pop]{
     animation-name: PopIn;
     animation-duration: 300ms;
 }

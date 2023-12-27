@@ -83,6 +83,10 @@ window.addEventListener('keydown', function (e) {
     }
 });
 function keyProcess(code) {
+    document.getElementById(code).setAttribute('animation', 'pop');
+        setTimeout(function(){
+            document.getElementById(code).setAttribute('animation', 'none');
+        },300);
     if (code === 'Enter') {
         if (cursor % 5 === 4 && aLetter[cursor].innerText != "") {
             //console.log("check");
