@@ -14,13 +14,13 @@ class Overworld {
             //console.log("stepping...");
 
             //clean obj in the canvas
-            this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
             //establish the camera person
-            const cameraPerson =this.map.gameObjects.hero;
+            const cameraPerson = this.map.gameObjects.hero;
 
             //update all objs
-            Object.values(this.map.gameObjects).forEach(object=>{
+            Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
                     arrow: this.directionInput.direction,
                     map: this.map,
@@ -31,7 +31,9 @@ class Overworld {
             this.map.drawLowerImage(this.ctx, cameraPerson);
 
             //draw game objs
-            Object.values(this.map.gameObjects).forEach(object=>{
+            Object.values(this.map.gameObjects).sort((a, b) => {
+                return a.y - b.y;       //if return >0: b->a, <0: a->b
+            }).forEach(object => {
                 //object.x += 1;
                 object.sprite.draw(this.ctx, cameraPerson);
             })
