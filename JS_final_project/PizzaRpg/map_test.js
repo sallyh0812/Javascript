@@ -12,12 +12,12 @@ class OverworldMap {
         this.upperImg = new Image();
         this.upperImg.src = config.upperSrc;
     }
-    drawLowerImage(ctx) {
-        ctx.drawImage(this.lowerImg, 0, 0);
+    drawLowerImage(ctx, cameraPerson) {
+        ctx.drawImage(this.lowerImg, utils.withGrid(10.5) -cameraPerson.x , utils.withGrid(6) -cameraPerson.y);
     }
 
-    drawUpperImage(ctx) {
-        ctx.drawImage(this.upperImg, 0, 0);
+    drawUpperImage(ctx, cameraPerson) {
+        ctx.drawImage(this.upperImg, utils.withGrid(10.5) -cameraPerson.x , utils.withGrid(6) -cameraPerson.y);
     }
 
 }
