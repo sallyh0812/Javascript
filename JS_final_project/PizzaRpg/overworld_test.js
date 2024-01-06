@@ -47,6 +47,7 @@ class Overworld {
         }
         step();
     }
+
     init() {
         this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
         console.log(this.map.walls);
@@ -55,6 +56,17 @@ class Overworld {
         this.directionInput.init();
         this.directionInput.direction; //return "down"
         this.startGameLoop();
+
+        this.map.startCutscene([
+            {who: "hero", type: "walk", direction:"down"},
+            {who: "hero", type: "walk", direction:"down"},
+            {who: "hero", type: "walk", direction:"left"},
+            {who: "npc1", type: "walk", direction:"right"},
+            {who: "npc1", type: "walk", direction:"right"},
+            {who: "npc1", type: "stand", direction:"down", time: 800},
+            {who: "npc2", type: "walk", direction:"right"},
+
+        ]);
 
         console.log("Hello from the Overworld!", this);
     }

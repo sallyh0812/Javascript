@@ -13,7 +13,7 @@ class OverworldMap {
         this.upperImg = new Image();
         this.upperImg.src = config.upperSrc;
 
-        this.isCutscenePlaying = false;
+        this.isCutscenePlaying = true;
     }
     drawLowerImage(ctx, cameraPerson) {
         ctx.drawImage(this.lowerImg, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y);
@@ -37,6 +37,22 @@ class OverworldMap {
             //TODO: determine if this obj should mount
             obj.mount(this);
         })
+    }
+
+    async startCutscene(events){
+        this.isCutscenePlaying = true;
+
+        //start a loop for async events
+        //await each one
+        for(let i = 0; i<events.length; i++){
+            const eventHandler = new OverworldEvent({
+                event:events[i],
+                map: this,
+            })
+            await eventHandler.init();
+        }
+
+        this.isCutscenePlaying = false;
     }
 
     addWall(x, y) {
