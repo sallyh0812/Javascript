@@ -55,12 +55,32 @@ class Overworld {
         })
     }
 
-    init() {
-        this.map = new OverworldMap(window.OverworldMaps.DemoRoom);
-        console.log(this.map.walls);
+    bindHeroPositionCheck(){
+        //"PersonWalkingComplete" in person.js
+        document.addEventListener("PersonWalkingComplete", e=>{
+            // if(e.detail.whoId === 'npc1'){
+            //     console.log("npc1's position changed.")
+            //     //this.map.checkForFootstepCutscene()
+            // }
+            if(e.detail.whoId === 'hero'){
+                console.log("hero's position changed.")
+                this.map.checkForFootstepCutscene()
+            }
+        })
+    }
+
+    startMap(mapConfig){
+        this.map = new OverworldMap(mapConfig);
+        this.map.overworld = this;
+        //console.log(this.map.walls);
         this.map.mountObjects();
+    }
+
+    init() {
+        this.startMap(window.OverworldMaps.DemoRoom);
 
         this.bindAcionInput();
+        this.bindHeroPositionCheck();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
@@ -77,7 +97,7 @@ class Overworld {
             {who: "hero", type: "stand", direction:"right", time: 800},
             {type: "textMessage", text: "Hello There!"},
             {who: "npc1", type: "stand", direction:"down", time: 800},
-            {who: "npc2", type: "walk", direction:"down"},
+            //{who: "npc2", type: "walk", direction:"down"},
 
         ]);
 

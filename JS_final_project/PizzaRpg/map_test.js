@@ -2,7 +2,11 @@
 
 class OverworldMap {
     constructor(config) {
+
+        this.overworld = null;
+
         this.gameObjects = config.gameObjects;
+        this.cutsceneSpaces = config.cutsceneSpaces || [];
         this.walls = config.walls || {};
 
         //beneath characters, floor, chair...
@@ -68,8 +72,18 @@ class OverworldMap {
             return `${obj.x},${obj.y}` === `${nextCoords.x},${nextCoords.y}`
         });
         console.log(match);
-        if(match && match.talking.length && !this.isCutscenePlaying){
+        if (match && match.talking.length && !this.isCutscenePlaying) {
             this.startCutscene(match.talking[0].events);
+        }
+    }
+
+    checkForFootstepCutscene() {
+        const hero = this.gameObjects["hero"];
+        const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
+        //console.log(match);
+
+        if (match && !this.isCutscenePlaying) {
+            this.startCutscene(match[0].events);
         }
     }
 
@@ -122,16 +136,16 @@ window.OverworldMaps = {
                 ]
             }),
             npc2: new Person({
-                x: utils.withGrid(4),
-                y: utils.withGrid(8),
+                x: utils.withGrid(8),
+                y: utils.withGrid(5),
                 src: "./img/characters/people/npc2.png",
-                behaviorLoop: [
-                    { type: "walk", direction: "left" },
-                    { type: "stand", direction: "up", time: 800 },
-                    { type: "walk", direction: "up" },
-                    { type: "walk", direction: "right" },
-                    { type: "walk", direction: "down" },
-                ],
+                // behaviorLoop: [
+                //     { type: "walk", direction: "left" },
+                //     { type: "stand", direction: "up", time: 800 },
+                //     { type: "walk", direction: "up" },
+                //     { type: "walk", direction: "right" },
+                //     { type: "walk", direction: "down" },
+                // ],
             })
         },
         walls: {
@@ -140,6 +154,27 @@ window.OverworldMaps = {
             [utils.asGridCoords(8, 6)]: true,
             [utils.asGridCoords(7, 7)]: true,
             [utils.asGridCoords(8, 7)]: true,
+        },
+        cutsceneSpaces: {
+            [utils.asGridCoords(7, 4)]: [
+                {
+                    events: [
+                        { who: "npc2", type: "walk", direction: "left" },
+                        { who: "npc2", type: "stand", direction: "up", time: 300 },
+                        { type: "textMessage", text: "You can't be in there!" },
+                        { who: "npc2", type: "walk", direction: "right" },
+                        { who: "hero", type: "walk", direction: "down" },
+                        { who: "hero", type: "walk", direction: "left" },
+                    ]
+                }
+            ],
+            [utils.asGridCoords(5, 10)]: [
+                {
+                    events: [
+                        { type: "changeMap", map: "Kitchen" },
+                    ]
+                }
+            ],
         }
     },
     Kitchen: {
@@ -149,24 +184,24 @@ window.OverworldMaps = {
             hero: new Person({
                 isPlayerControlled: true,
                 x: utils.withGrid(3),
-                y: utils.withGrid(3),
-            }),
-            npc1: new Person({
-                x: utils.withGrid(4),
-                y: utils.withGrid(4),
-                src: "./img/characters/people/npc1.png"
-            }),
-            npc2: new Person({
-                x: utils.withGrid(5),
                 y: utils.withGrid(5),
-                src: "./img/characters/people/npc2.png"
             }),
             npc3: new Person({
-                x: utils.withGrid(6),
-                y: utils.withGrid(6),
-                src: "./img/characters/people/npc3.png"
-            }),
-        }
+                x: utils.withGrid(10),
+                y: utils.withGrid(8),
+                src: "./img/characters/people/npc3.png",
+                behaviorLoop: [
+                    {},
+                ],
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "You made it!", faceHero: "npc3" },
+                        ],
+                    },
+                ]
+            })
+        },
     },
 
 }
