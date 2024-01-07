@@ -30,5 +30,20 @@ const utils =  {
             detail
         });
         document.dispatchEvent(event);
+    },
+
+    oppositeDirection(direction){
+        if(direction === "left"){
+            return "right";
+        }
+        if(direction === "right"){
+            return "left";
+        }
+        if(direction === "up"){
+            return "down";
+        }
+        if(direction === "down"){
+            return "up";
+        }
     }
 }

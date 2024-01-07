@@ -4,6 +4,8 @@ class Person extends GameObject {
     constructor(config) {
         super(config);
         this.movingProgressRemaining = 0;
+        this.isStanding = false;
+
         this.isPlayerControlled = config.isPlayerControlled || false;
 
         this.direction = "down";
@@ -41,7 +43,7 @@ class Person extends GameObject {
 
         if (behavior.type === "walk") {
             //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-            console.log("start behavior walk");
+            //console.log("start behavior walk");
 
             //stop if space is not free
             if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
@@ -58,12 +60,15 @@ class Person extends GameObject {
         }
         if (behavior.type === "stand") {
             //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-            console.log("start behavior stand");
+            //console.log("start behavior stand");
+
+            this.isStanding =true;
 
             setTimeout(()=>{
                 utils.emitEvent("PersonStandComplete",{
                     whoId: this.id,
                 })
+                this.isStanding = false;
             }, behavior.time);
         }
 

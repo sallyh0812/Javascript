@@ -1,3 +1,5 @@
+"use strict";
+
 class OverworldEvent {
     constructor({ map, event }) {
         this.map = map;
@@ -15,8 +17,8 @@ class OverworldEvent {
         })
 
         //set up a handler to complete when correct person is done walking then resolve the event
-        const completeHandler = e =>{
-            if (e.detail.whoId === this.event.who){
+        const completeHandler = e => {
+            if (e.detail.whoId === this.event.who) {
                 document.removeEventListener("PersonStandComplete", completeHandler);
                 resolve();
             }
@@ -36,8 +38,8 @@ class OverworldEvent {
         })
 
         //set up a handler to complete when correct person is done walking then resolve the event
-        const completeHandler = e =>{
-            if (e.detail.whoId === this.event.who){
+        const completeHandler = e => {
+            if (e.detail.whoId === this.event.who) {
                 document.removeEventListener("PersonWalkingComplete", completeHandler);
                 resolve();
             }
@@ -46,8 +48,23 @@ class OverworldEvent {
         document.addEventListener("PersonWalkingComplete", completeHandler);
     }
 
+    textMessage(resolve) {
+        //console.log(this.event.text);
+
+        if (this.event.faceHero){
+            const obj = this.map.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        }
+
+        const message = new TextMessage({
+            text: this.event.text,
+            onComplete: () => resolve(),
+        })
+        message.init(document.querySelector(".game-container"));
+    }
+
     init() {
-        console.log("OverworldEvent init");
+        //console.log("OverworldEvent init");
         return new Promise(resolve => {
             this[this.event.type](resolve)  //this.event.type -> "walk", "stand"
         })

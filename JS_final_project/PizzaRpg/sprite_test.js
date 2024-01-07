@@ -8,7 +8,7 @@ class Sprite {
         this.image.src = config.src;
         this.image.onload = () => {
             this.isLoaded = true;
-            console.log("onload");
+            //console.log("onload");
         }
 
         //shadow
