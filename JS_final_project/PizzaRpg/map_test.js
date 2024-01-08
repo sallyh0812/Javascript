@@ -151,6 +151,51 @@ window.OverworldMaps = {
         },
         walls: {
             //"16,16":true,
+            [utils.asGridCoords(0, 1)]: true,
+            [utils.asGridCoords(0, 2)]: true,
+            [utils.asGridCoords(0, 3)]: true,
+            [utils.asGridCoords(0, 4)]: true,
+            [utils.asGridCoords(0, 5)]: true,
+            [utils.asGridCoords(0, 6)]: true,
+            [utils.asGridCoords(0, 7)]: true,
+            [utils.asGridCoords(0, 8)]: true,
+            [utils.asGridCoords(0, 9)]: true,
+
+            [utils.asGridCoords(11, 1)]: true,
+            [utils.asGridCoords(11, 2)]: true,
+            [utils.asGridCoords(11, 3)]: true,
+            [utils.asGridCoords(11, 4)]: true,
+            [utils.asGridCoords(11, 5)]: true,
+            [utils.asGridCoords(11, 6)]: true,
+            [utils.asGridCoords(11, 7)]: true,
+            [utils.asGridCoords(11, 8)]: true,
+            [utils.asGridCoords(11, 9)]: true,
+
+            [utils.asGridCoords(1, 3)]: true,
+            [utils.asGridCoords(2, 3)]: true,
+            [utils.asGridCoords(3, 3)]: true,
+            [utils.asGridCoords(4, 3)]: true,
+            [utils.asGridCoords(5, 3)]: true,
+            [utils.asGridCoords(6, 3)]: true,
+            [utils.asGridCoords(7, 3)]: true,
+            [utils.asGridCoords(8, 3)]: true,
+            [utils.asGridCoords(9, 3)]: true,
+            [utils.asGridCoords(10, 3)]: true,
+
+            [utils.asGridCoords(1, 10)]: true,
+            [utils.asGridCoords(2, 10)]: true,
+            [utils.asGridCoords(3, 10)]: true,
+            [utils.asGridCoords(4, 10)]: true,
+            [utils.asGridCoords(5, 11)]: true,
+            [utils.asGridCoords(6, 10)]: true,
+            [utils.asGridCoords(7, 10)]: true,
+            [utils.asGridCoords(8, 10)]: true,
+            [utils.asGridCoords(9, 10)]: true,
+            [utils.asGridCoords(10, 10)]: true,
+
+            [utils.asGridCoords(8, 4)]: true,
+            [utils.asGridCoords(6, 4)]: true,
+
             [utils.asGridCoords(7, 6)]: true,
             [utils.asGridCoords(8, 6)]: true,
             [utils.asGridCoords(7, 7)]: true,
@@ -187,24 +232,8 @@ window.OverworldMaps = {
                 x: utils.withGrid(3),
                 y: utils.withGrid(5),
             }),
-            // npc3: new Person({
-            //     x: utils.withGrid(10),
-            //     y: utils.withGrid(8),
-            //     src: "./img/characters/people/npc3.png",
-            //     behaviorLoop: [
-            //         {type: "walk", direction: "left" },
-            //         { type: "walk", direction: "right"},
-            //     ],
-            //     talking: [
-            //         {
-            //             events: [
-            //                 { type: "textMessage", text: "You made it!", faceHero: "npc3" },
-            //             ],
-            //         },
-            //     ]
-            // })
             npc3: new Person({
-                x: utils.withGrid(6),
+                x: utils.withGrid(10),
                 y: utils.withGrid(8),
                 src: "./img/characters/people/npc3.png",
                 behaviorLoop: [
@@ -223,6 +252,61 @@ window.OverworldMaps = {
                 ]
             }),
         },
+        walls: {
+            //"16,16":true,
+            [utils.asGridCoords(0, 1)]: true,
+            [utils.asGridCoords(0, 2)]: true,
+            [utils.asGridCoords(0, 3)]: true,
+            [utils.asGridCoords(0, 4)]: true,
+            [utils.asGridCoords(0, 5)]: true,
+            [utils.asGridCoords(0, 6)]: true,
+            [utils.asGridCoords(0, 7)]: true,
+            [utils.asGridCoords(0, 8)]: true,
+            [utils.asGridCoords(0, 9)]: true,
+
+            [utils.asGridCoords(13, 1)]: true,
+            [utils.asGridCoords(13, 2)]: true,
+            [utils.asGridCoords(13, 3)]: true,
+            [utils.asGridCoords(13, 4)]: true,
+            [utils.asGridCoords(13, 5)]: true,
+            [utils.asGridCoords(13, 6)]: true,
+            [utils.asGridCoords(13, 7)]: true,
+            [utils.asGridCoords(13, 8)]: true,
+            [utils.asGridCoords(13, 9)]: true,
+
+            [utils.asGridCoords(1, 3)]: true,
+            [utils.asGridCoords(2, 3)]: true,
+            [utils.asGridCoords(3, 3)]: true,
+            [utils.asGridCoords(4, 3)]: true,
+            [utils.asGridCoords(5, 3)]: true,
+            [utils.asGridCoords(6, 3)]: true,
+            [utils.asGridCoords(7, 3)]: true,
+            [utils.asGridCoords(8, 3)]: true,
+            [utils.asGridCoords(9, 3)]: true,
+            [utils.asGridCoords(10, 3)]: true,
+
+            [utils.asGridCoords(1, 10)]: true,
+            [utils.asGridCoords(2, 10)]: true,
+            [utils.asGridCoords(3, 10)]: true,
+            [utils.asGridCoords(4, 10)]: true,
+            [utils.asGridCoords(5, 11)]: true,
+            [utils.asGridCoords(6, 10)]: true,
+            [utils.asGridCoords(7, 10)]: true,
+            [utils.asGridCoords(8, 10)]: true,
+            [utils.asGridCoords(9, 10)]: true,
+            [utils.asGridCoords(10, 10)]: true,
+            [utils.asGridCoords(11, 10)]: true,
+            [utils.asGridCoords(12, 10)]: true,
+        },
+        cutsceneSpaces: {
+            [utils.asGridCoords(5, 10)]: [
+                {
+                    events: [
+                        { type: "changeMap", map: "DemoRoom" },
+                    ]
+                }
+            ],
+        }
     },
 
 }

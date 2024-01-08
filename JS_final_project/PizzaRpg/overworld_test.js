@@ -48,28 +48,28 @@ class Overworld {
         step();
     }
 
-    bindAcionInput(){
-        new KeyPressListener("Enter",()=>{
+    bindAcionInput() {
+        new KeyPressListener("Enter", () => {
             //is there a person here to talk to
             this.map.checkForActionCutscene();
         })
     }
 
-    bindHeroPositionCheck(){
+    bindHeroPositionCheck() {
         //"PersonWalkingComplete" in person.js
-        document.addEventListener("PersonWalkingComplete", e=>{
+        document.addEventListener("PersonWalkingComplete", e => {
             // if(e.detail.whoId === 'npc1'){
             //     console.log("npc1's position changed.")
             //     //this.map.checkForFootstepCutscene()
             // }
-            if(e.detail.whoId === 'hero'){
+            if (e.detail.whoId === 'hero') {
                 console.log("hero's position changed.")
                 this.map.checkForFootstepCutscene()
             }
         })
     }
 
-    startMap(mapConfig){
+    startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
         //console.log(this.map.walls);
@@ -89,11 +89,11 @@ class Overworld {
 
         this.startGameLoop();
 
-        this.map.startCutscene([
-            {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
-            //{who: "npc1", type: "stand", direction:"down", time: 800},
-            {who: "npc3", type: "stand", direction:"down", time: 800},
-        ]);
+        // this.map.startCutscene([
+        //     {who: "npc1", type: "stand", direction:"down", time: 800},
+        //     {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
+        //     {type: "changeMap", map: "DemoRoom"},
+        // ]);
 
         console.log("Hello from the Overworld!", this);
     }
