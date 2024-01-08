@@ -77,7 +77,7 @@ class Overworld {
     }
 
     init() {
-        this.startMap(window.OverworldMaps.DemoRoom);
+        this.startMap(window.OverworldMaps.Kitchen);
 
         this.bindAcionInput();
         this.bindHeroPositionCheck();
@@ -90,15 +90,9 @@ class Overworld {
         this.startGameLoop();
 
         this.map.startCutscene([
-            {who: "hero", type: "walk", direction:"down"},
-            {who: "hero", type: "walk", direction:"down"},
-            {who: "npc1", type: "walk", direction:"up"},
-            {who: "npc1", type: "walk", direction:"left"},
-            {who: "hero", type: "stand", direction:"right", time: 800},
-            {type: "textMessage", text: "Hello There!"},
-            {who: "npc1", type: "stand", direction:"down", time: 800},
-            //{who: "npc2", type: "walk", direction:"down"},
-
+            {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
+            //{who: "npc1", type: "stand", direction:"down", time: 800},
+            {who: "npc3", type: "stand", direction:"down", time: 800},
         ]);
 
         console.log("Hello from the Overworld!", this);

@@ -19,6 +19,7 @@ class OverworldMap {
 
         this.isCutscenePlaying = false;
     }
+
     drawLowerImage(ctx, cameraPerson) {
         ctx.drawImage(this.lowerImg, utils.withGrid(10.5) - cameraPerson.x, utils.withGrid(6) - cameraPerson.y);
     }
@@ -186,21 +187,41 @@ window.OverworldMaps = {
                 x: utils.withGrid(3),
                 y: utils.withGrid(5),
             }),
+            // npc3: new Person({
+            //     x: utils.withGrid(10),
+            //     y: utils.withGrid(8),
+            //     src: "./img/characters/people/npc3.png",
+            //     behaviorLoop: [
+            //         {type: "walk", direction: "left" },
+            //         { type: "walk", direction: "right"},
+            //     ],
+            //     talking: [
+            //         {
+            //             events: [
+            //                 { type: "textMessage", text: "You made it!", faceHero: "npc3" },
+            //             ],
+            //         },
+            //     ]
+            // })
             npc3: new Person({
-                x: utils.withGrid(10),
+                x: utils.withGrid(6),
                 y: utils.withGrid(8),
                 src: "./img/characters/people/npc3.png",
                 behaviorLoop: [
-                    {},
+                    { type: "stand", direction: "left", time: 1000 },
+                    { type: "walk", direction: "left" },
+                    { type: "walk", direction: "right" },
+                    { type: "stand", direction: "up", time: 600 },
+
                 ],
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", text: "You made it!", faceHero: "npc3" },
+                            { type: "textMessage", text: "You made it!", faceHero: "npc3" }
                         ],
                     },
                 ]
-            })
+            }),
         },
     },
 
