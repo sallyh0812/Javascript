@@ -14,14 +14,20 @@ window.Pizzas ={
         type: PizzaTypes.spicy,
         src: "/img/characters/pizzas/s001.png",
         icon: "img/icons/spicy.png",
-        actions:["damage1"],
+        actions:[
+            "saucyStatus",
+            "damage1"
+        ],
     },
     v001:{
         name: "Call me Kale",
         type: PizzaTypes.veggie,
         src: "/img/characters/pizzas/v001.png",
         icon: "img/icons/veggie.png",
-        actions:["damage1"],
+        actions:[
+            "clumsyStatus",
+            "damage1"
+        ],
     },
     f001:{
         name: "Portobello Express",

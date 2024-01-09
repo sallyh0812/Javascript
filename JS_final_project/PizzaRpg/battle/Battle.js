@@ -17,10 +17,10 @@ class Battle {
                 maxXp:100,
                 level: 1,
                 status: null,
-                // status: {
-                //     type: "clumsy",
-                //     expiresIn: 3,
-                // }
+                status: {
+                    type: "saucy",
+                    expiresIn: 1,
+                }
             }, this),
 
             "enemy1": new Combatant({

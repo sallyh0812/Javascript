@@ -18,17 +18,17 @@ class Combatant {
         this.battle = battle;
     }
 
-    get hpPercent(){
+    get hpPercent() {
         const percent = this.hp / this.maxHp * 100;
         return percent > 0 ? percent : 0;
     }
 
-    get xpPercent(){
+    get xpPercent() {
         const percent = this.xp / this.maxXp * 100;
         return percent > 0 ? percent : 0;
     }
 
-    get isActive(){
+    get isActive() {
         return this.battle.activeCombatants[this.team] === this.id;
     }
 
@@ -66,8 +66,8 @@ class Combatant {
         this.xpFills = this.hudElement.querySelectorAll(".combatant_xp-container > rect");
     }
 
-    update(changes={}){
-        Object.keys(changes).forEach(key=>{
+    update(changes = {}) {
+        Object.keys(changes).forEach(key => {
             this[key] = changes[key];
         });
 
@@ -77,13 +77,58 @@ class Combatant {
 
         this.hudElement.querySelector(".combatant_level").innerText = this.level;
 
-        this.hpFills.forEach(rect=>{
+        //update hp xp bar
+        this.hpFills.forEach(rect => {
             rect.style.width = `${this.hpPercent}%`
         });
-
-        this.xpFills.forEach(rect=>{
+        this.xpFills.forEach(rect => {
             rect.style.width = `${this.xpPercent}%`
         });
+
+        //update status
+        const statusElement = this.hudElement.querySelector(".combatant_status");
+        if (this.status) {
+            statusElement.innerText = this.status.type;
+            statusElement.style.display = "block";
+        } else {
+            statusElement.innerText = "";
+            statusElement.style.display = "none";
+        }
+    }
+
+    getPostEvents() {
+        if (this.status?.type === "saucy") {
+            return [
+                { type: "textMessage", text: "Feeling Saucy" },
+                { type: "stateChange", recover: 5, onCaster: true },
+            ]
+        }
+        return [];
+    }
+
+    getReplacedEvents(originalEvents){
+        if(this.status?.type === "clumsy" && utils.randomFromArray([true,faLse])){
+            //replace event
+            return [
+                {type: "textMessage", text: `${this.name} flops over`}
+            ]
+        }
+        return originalEvents;
+    }
+
+    decrementStatus() {
+        if (this.status?.expiresIn > 0) {
+            this.status.expiresIn -= 1;
+            if (this.status.expiresIn === 0) {
+                let expiredStatus = this.status.type;
+                this.update({ status: null, });
+                return {
+                    type: "textMessage",
+                    text: `No longer ${expiredStatus}!`,
+                };
+            }
+        }
+        return null;
     }
 
     init(container) {

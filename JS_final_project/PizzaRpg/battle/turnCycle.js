@@ -31,7 +31,7 @@ class TurnCycle {
             enemy: enemy,
         });
 
-        const resultingEvent = submission.action.success;
+        const resultingEvent = caster.getReplacedEvents(submission.action.success);
         /**success: [
             {type: "textMessage", text: "{Pizza} uses Whomp!"},
             {type: "animation", animation: "toBeDefined"},
@@ -53,6 +53,27 @@ class TurnCycle {
             // console.log(`event.target.name from turnCycle: ${event.target.name}`);
 
             await this.onNewEvent(event);
+        }
+
+        //check for post event
+        // do things after original turn submission
+        const postEvents = caster.getPostEvents();
+        for(let i = 0; i<postEvents.length; i++){
+            const event = {
+                ...postEvents[i],
+                submission,
+                action: submission.action,
+                caster: caster,
+                target: submission.target,
+
+            }
+            await this.onNewEvent(event);
+        }
+
+        //check for status expire
+        const expiredEvent = caster.decrementStatus();
+        if(expiredEvent){
+            await this.onNewEvent(expiredEvent);
         }
 
         this.currentTeam = this.currentTeam === "player" ? "enemy": "player";
