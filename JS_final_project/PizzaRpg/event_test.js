@@ -90,7 +90,7 @@ class OverworldEvent {
     init() {
         //console.log("OverworldEvent init");
         return new Promise(resolve => {
-            this[this.event.type](resolve)  //this.event.type -> "walk", "stand"
+            this[this.event.type](resolve);  //this.event.type -> "walk", "stand"
         })
     }
 }
