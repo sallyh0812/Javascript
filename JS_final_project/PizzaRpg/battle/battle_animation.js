@@ -36,5 +36,20 @@ window.BattleAnimatons = {
 
         await utils.wait(820);
         onComplete();
-    }
+    },
+
+    async rotate(event, onComplete) {
+        const element = event.caster.pizzaElement;
+        const animationClassName = "rotate";
+
+        element.classList.add(animationClassName);
+
+        element.addEventListener("animationend", () => {
+            element.classList.remove(animationClassName);
+        }, { once: true });
+
+        //continue battle cycle right around when the pizzas collide
+        await utils.wait(100);
+        onComplete();
+    },
 }

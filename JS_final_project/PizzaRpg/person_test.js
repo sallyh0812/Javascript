@@ -53,6 +53,7 @@ class Person extends GameObject {
                 },10);
                 return;
             }
+            
             //ready to walk
             state.map.moveWall(this.x, this.y, this.direction);
             this.movingProgressRemaining = 16;

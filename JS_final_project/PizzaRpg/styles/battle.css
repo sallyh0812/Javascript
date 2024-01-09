@@ -134,3 +134,16 @@
     top: 56px;
     animation: battle-glob-left 1s forwards;
 }
+
+@keyframes rotate {
+    0%{
+        transform: scale(0.5) rotate(0deg); opacity: 1;
+    }
+    100%{
+        transform: scale(2) rotate(360deg); opacity: 1;
+    }
+}
+
+.rotate{
+    animation: rotate 0.5s;
+}

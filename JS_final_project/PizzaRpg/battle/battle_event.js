@@ -54,36 +54,38 @@ class BattleEvent {
         menu.init(this.battle.element);
     }
 
-    async stateChange(resolve){
-        const {caster, target, damage, recover, status,action} = this.event;
-        let who = this.event.onCaster ? caster: target;
-        if(action.targetType === "friendly"){
-            who = caster;
-        }
+    async stateChange(resolve) {
+        const { caster, target, damage, recover, status, action } = this.event;
+        let who = this.event.onCaster ? caster : target;
 
-        if(damage){
+        /*finished in SubmissionMenu.js menuSubmit
+            if(action.targetType === "friendly"){
+                who = caster;
+         }*/
+
+        if (damage) {
             //modify target to have less hp
             target.update({
-                hp: target.hp-=damage,
-            })
+                hp: target.hp -= damage,
+            });
 
             //start blinking
             console.log(`target.name from battle_event stateChange ${target.name}`);
             target.pizzaElement.classList.add("battle-damage-blink");
         }
 
-        if(recover){
-            who.hp = who.hp + recover > who.maxHp ? who.maxHp: who.hp + recover;
+        if (recover) {
+            who.hp = who.hp + recover > who.maxHp ? who.maxHp : who.hp + recover;
             who.update();
         }
 
-        if(status){
+        if (status) {
             who.update({
-                status: {...status},
+                status: { ...status },
             })
         }
 
-        if(status === null){
+        if (status === null) {
             who.update({
                 status: null,
             })
@@ -98,7 +100,7 @@ class BattleEvent {
         resolve();
     }
 
-    animation(resolve){
+    animation(resolve) {
         const fn = BattleAnimatons[this.event.animation];
         fn(this.event, resolve);
     }

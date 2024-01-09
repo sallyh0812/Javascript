@@ -15,8 +15,9 @@ window.Pizzas ={
         src: "/img/characters/pizzas/s001.png",
         icon: "img/icons/spicy.png",
         actions:[
+            "clumsyStatus",
             "saucyStatus",
-            "damage1"
+            "damage1",
         ],
     },
     v001:{
@@ -25,8 +26,8 @@ window.Pizzas ={
         src: "/img/characters/pizzas/v001.png",
         icon: "img/icons/veggie.png",
         actions:[
+            "damage1",
             "clumsyStatus",
-            "damage1"
         ],
     },
     f001:{

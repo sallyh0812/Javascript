@@ -128,10 +128,9 @@ window.OverworldMaps = {
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", text: "Hi, how you do'in", faceHero: "npc1" },
-                            { type: "textMessage", text: "Come with me!" },
-                            { who: "npc1", type: "walk", direction: "up" },
-                            { who: "hero", type: "walk", direction: "up" },
+                            { type: "textMessage", text: "Finally... We need some help!", faceHero: "npc1" },
+                            { type: "textMessage", text: "Go find and beat the bad guy in the kitchen..." },
+                            { who: "npc1", type: "walk", direction: "down" },
                         ],
                     },
                 ]
@@ -233,20 +232,28 @@ window.OverworldMaps = {
                 y: utils.withGrid(5),
             }),
             npc3: new Person({
-                x: utils.withGrid(10),
+                x: utils.withGrid(9),
                 y: utils.withGrid(8),
                 src: "./img/characters/people/npc3.png",
                 behaviorLoop: [
-                    { type: "stand", direction: "left", time: 1000 },
+                    { type: "stand", direction: "down", time: 500 },
                     { type: "walk", direction: "left" },
+                    { type: "stand", direction: "left", time: 300 },
+                    { type: "walk", direction: "up" },
+                    { type: "stand", direction: "up", time: 300 },
+                    { type: "walk", direction: "down" },
                     { type: "walk", direction: "right" },
-                    { type: "stand", direction: "up", time: 600 },
+                    { type: "stand", direction: "right", time: 300 },
 
                 ],
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", text: "You made it!", faceHero: "npc3" }
+                            { type: "textMessage", text: "How did you find me!!!", faceHero: "npc3" },
+                            { type: "textMessage", text: "What have you done to the pizza paradise?", faceHero: "npc3" },
+                            { type: "textMessage", text: "Huh? My new flavor is the best!", faceHero: "npc3" },
+                            { type: "textMessage", text: "Let's Battle!", faceHero: "npc3" },
+                            { type: "battle" }
                         ],
                     },
                 ]

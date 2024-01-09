@@ -99,15 +99,22 @@ class Combatant {
     getPostEvents() {
         if (this.status?.type === "saucy") {
             return [
-                { type: "textMessage", text: "Feeling Saucy" },
+                { type: "textMessage", text: "Feeling Saucy!" },
                 { type: "stateChange", recover: 5, onCaster: true },
             ]
         }
+
+        // if (this.status?.type === "clumsy") {
+        //     return [
+        //         { type: "textMessage", text: "Feeling Clumsy..." },
+        //         { type: "stateChange", damage: 5, onCaster: false },
+        //     ]
+        // }
         return [];
     }
 
     getReplacedEvents(originalEvents){
-        if(this.status?.type === "clumsy" && utils.randomFromArray([true,faLse])){
+        if(this.status?.type === "clumsy" && utils.randomFromArray([true,false])){
             //replace event
             return [
                 {type: "textMessage", text: `${this.name} flops over`}

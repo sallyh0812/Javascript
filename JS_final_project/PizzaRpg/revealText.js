@@ -4,7 +4,7 @@ class RevealText {
     constructor(config) {
         this.element = config.element;
         this.text = config.text;
-        this.speed = config.speed || 100;
+        this.speed = config.speed || 50;
 
         this.timeout = null;
         this.isDone = false;

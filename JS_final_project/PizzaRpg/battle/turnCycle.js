@@ -65,7 +65,6 @@ class TurnCycle {
                 action: submission.action,
                 caster: caster,
                 target: submission.target,
-
             }
             await this.onNewEvent(event);
         }
@@ -82,10 +81,10 @@ class TurnCycle {
     }
 
     async init() {
-        await this.onNewEvent({
-            type: "textMessage",
-            text: "The battle is starting!",
-        });
+        // await this.onNewEvent({
+        //     type: "textMessage",
+        //     text: "The battle is starting!",
+        // });
 
         //start the first turn
         this.turn();
