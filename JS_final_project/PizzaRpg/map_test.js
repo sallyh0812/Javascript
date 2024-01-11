@@ -119,10 +119,17 @@ window.OverworldMaps = {
                 y: utils.withGrid(8),
                 src: "./img/characters/people/npc1.png",
                 behaviorLoop: [
-                    { type: "stand", direction: "left", time: 1000 },
-                    { type: "stand", direction: "up", time: 500 },
-                    { type: "stand", direction: "right", time: 300 },
-                    { type: "stand", direction: "up", time: 600 },
+                    { type: "walk", direction: "left" },
+                    { type: "walk", direction: "up", },
+                    { type: "stand", direction: "right", time: 500 },
+                    { type: "stand", direction: "left", time: 500 },
+                    { type: "walk", direction: "up", },
+                    { type: "walk", direction: "right" },
+                    { type: "walk", direction: "down" },
+                    { type: "stand", direction: "left", time: 500 },
+                    { type: "stand", direction: "right", time: 500 },
+                    { type: "stand", direction: "left", time: 500 },
+                    { type: "walk", direction: "down" },
 
                 ],
                 talking: [
@@ -130,7 +137,7 @@ window.OverworldMaps = {
                         events: [
                             { type: "textMessage", text: "Finally... We need some help!", faceHero: "npc1" },
                             { type: "textMessage", text: "Go find and beat the bad guy in the kitchen..." },
-                            { who: "npc1", type: "walk", direction: "down" },
+                            { who: "npc1", type: "stand", direction: "down", time: 500 },
                         ],
                     },
                 ]
@@ -139,13 +146,19 @@ window.OverworldMaps = {
                 x: utils.withGrid(8),
                 y: utils.withGrid(5),
                 src: "./img/characters/people/npc2.png",
-                // behaviorLoop: [
-                //     { type: "walk", direction: "left" },
-                //     { type: "stand", direction: "up", time: 800 },
-                //     { type: "walk", direction: "up" },
-                //     { type: "walk", direction: "right" },
-                //     { type: "walk", direction: "down" },
-                // ],
+                behaviorLoop: [
+                    { type: "stand", direction: "down", time: 500 },
+                ],
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "I'm the most loyal staff ever...", faceHero: "npc2" },
+                            { type: "textMessage", text: "I love the pizzas here, but recently..." },
+                            { type: "textMessage", text: "Oh, today is my baby girl's birthday! I gotta make a phone call" },
+                            { who: "npc2", type: "stand", direction: "up", time: 1000 },
+                        ],
+                    },
+                ]
             })
         },
         walls: {
@@ -201,22 +214,23 @@ window.OverworldMaps = {
             [utils.asGridCoords(8, 7)]: true,
         },
         cutsceneSpaces: {
+            [utils.asGridCoords(5, 10)]: [
+                {
+                    events: [
+                        { type: "changeMap", map: "Kitchen" },
+                    ]
+                }
+            ],
             [utils.asGridCoords(7, 4)]: [
                 {
                     events: [
                         { who: "npc2", type: "walk", direction: "left" },
                         { who: "npc2", type: "stand", direction: "up", time: 300 },
-                        { type: "textMessage", text: "You can't be in there!" },
+                        { type: "textMessage", text: "Hey! You can't be in there!" },
+                        { who: "npc2", type: "stand", direction: "up", time: 300 },
                         { who: "npc2", type: "walk", direction: "right" },
                         { who: "hero", type: "walk", direction: "down" },
                         { who: "hero", type: "walk", direction: "left" },
-                    ]
-                }
-            ],
-            [utils.asGridCoords(5, 10)]: [
-                {
-                    events: [
-                        { type: "changeMap", map: "Kitchen" },
                     ]
                 }
             ],

@@ -6,9 +6,8 @@ window.Actions = {
         description: "Basic attack",
         targetType: "",
         success: [
-            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}" },
+            { type: "textMessage", text: "{CASTER} uses {ACTION}" },
             { type: "animation", animation: "spin" },
-            // {type: "textMessage", text: "Something happend!"},
             { type: "stateChange", damage: 10 },
         ],
     },
@@ -36,7 +35,7 @@ window.Actions = {
         name: "Olive Oil",
         description: "Make longterm damage",
         success: [
-            { type: "textMessage", text: "{CASTER} uses {ACTION} on {TARGET}" },
+            { type: "textMessage", text: "{CASTER} uses {ACTION}" },
             { type: "animation", animation: "glob", color: "rgba(204, 204, 0,0.8)" },
             { type: "stateChange", status: { type: "clumsy", expiresIn: 3 } , damage: 3},
             { type: "textMessage", text: "{TARGET} is slipping!!" },

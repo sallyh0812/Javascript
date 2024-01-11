@@ -43,7 +43,6 @@ class TextMessage {
         }else{
             this.reavealingText.warpToDone();
         }
-
     }
 
     init(container) {

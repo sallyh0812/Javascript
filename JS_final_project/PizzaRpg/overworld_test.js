@@ -10,9 +10,6 @@ class Overworld {
     }
     startGameLoop() {
         const step = () => {
-            //step() -> infinite loop
-            //console.log("stepping...");
-
             //clean obj in the canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -43,7 +40,7 @@ class Overworld {
 
             requestAnimationFrame(() => {
                 step();
-            })
+            });
         }
         step();
     }
@@ -56,12 +53,9 @@ class Overworld {
     }
 
     bindHeroPositionCheck() {
-        //"PersonWalkingComplete" in person.js
+        //"PersonWalkingComplete" defined in person.js
         document.addEventListener("PersonWalkingComplete", e => {
-            // if(e.detail.whoId === 'npc1'){
-            //     console.log("npc1's position changed.")
-            //     //this.map.checkForFootstepCutscene()
-            // }
+
             if (e.detail.whoId === 'hero') {
                 console.log("hero's position changed.")
                 this.map.checkForFootstepCutscene()
@@ -72,7 +66,6 @@ class Overworld {
     startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
-        //console.log(this.map.walls);
         this.map.mountObjects();
     }
 
@@ -90,14 +83,12 @@ class Overworld {
         this.startGameLoop();
 
         this.map.startCutscene([
-            // {who: "npc1", type: "stand", direction:"down", time: 800},
-            // {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
+            {who: "npc1", type: "stand", direction:"down", time: 800},
+            {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
             // {type: "changeMap", map: "DemoRoom"},
-            {type: "battle"},
+            //{type: "battle"},
         ]);
 
         console.log("Hello from the Overworld!", this);
     }
-
-
 }

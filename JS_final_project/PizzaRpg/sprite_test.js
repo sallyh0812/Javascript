@@ -44,17 +44,7 @@ class Sprite {
     }
 
     get frame() {
-        //console.log(this.animations[this.currentAnimation][this.currentAnimationFrame]);
         return this.animations[this.currentAnimation][this.currentAnimationFrame];
-    }
-
-    setAnimation(key) {
-        //console.log(key);
-        if (this.currentAnimation !== key) {
-            this.currentAnimation = key;
-            this.currentAnimationFrame = 0;
-            this.animationFrameProgress = this.animationFrameLimit;
-        }
     }
 
     updateAnimationProgress() {
@@ -63,15 +53,21 @@ class Sprite {
             this.animationFrameProgress -= 1;
             return;
         }
-
         //reset animation progree
         this.animationFrameProgress = this.animationFrameLimit;
         this.currentAnimationFrame += 1;
 
-        //console.log(this.frame);
-
         if (this.frame === undefined) {
             this.currentAnimationFrame = 0;
+        }
+    }
+
+    setAnimation(key) {
+        //console.log(key);
+        if (this.currentAnimation !== key) {
+            this.currentAnimation = key;
+            this.currentAnimationFrame = 0;
+            this.animationFrameProgress = this.animationFrameLimit;
         }
     }
 

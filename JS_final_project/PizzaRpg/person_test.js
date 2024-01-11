@@ -42,9 +42,6 @@ class Person extends GameObject {
         this.direction = behavior.direction;
 
         if (behavior.type === "walk") {
-            //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-            //console.log("start behavior walk");
-
             //stop if space is not free
             if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
                 //if (behavior.retry)
@@ -53,7 +50,7 @@ class Person extends GameObject {
                 },10);
                 return;
             }
-            
+
             //ready to walk
             state.map.moveWall(this.x, this.y, this.direction);
             this.movingProgressRemaining = 16;

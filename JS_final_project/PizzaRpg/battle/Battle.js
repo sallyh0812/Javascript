@@ -1,5 +1,5 @@
 class Battle {
-    constructor() {
+    constructor({onComplete}) {
         this.combatants = {
             "player1": new Combatant({
                 ...Pizzas.s001,
@@ -23,7 +23,7 @@ class Battle {
             "enemy1": new Combatant({
                 ...Pizzas["v001"],
                 team: "enemy",
-                hp: 20,
+                hp: 40,
                 maxHp: 50,
                 xp: 50,
                 maxXp:50,
@@ -47,6 +47,7 @@ class Battle {
             player: "player1",
             enemy: "enemy1",
         }
+        this.onComplete = onComplete;
     }
 
     createElement() {
@@ -79,7 +80,7 @@ class Battle {
                     const battleEvent = new BattleEvent(event, this);
                     battleEvent.init(resolve);
                 })
-            }
+            },
         });
 
         this.turnCycle.init();

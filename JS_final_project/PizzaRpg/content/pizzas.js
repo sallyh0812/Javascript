@@ -27,6 +27,7 @@ window.Pizzas ={
         icon: "img/icons/veggie.png",
         actions:[
             "damage1",
+            "saucyStatus",
             "clumsyStatus",
         ],
     },

@@ -65,13 +65,13 @@ class BattleEvent {
 
         if (damage) {
             //modify target to have less hp
-            target.update({
-                hp: target.hp -= damage,
+            who.update({
+                hp: who.hp - damage,
             });
 
             //start blinking
-            console.log(`target.name from battle_event stateChange ${target.name}`);
-            target.pizzaElement.classList.add("battle-damage-blink");
+            console.log(`who.name from battle_event stateChange ${who.name}`);
+            who.pizzaElement.classList.add("battle-damage-blink");
         }
 
         if (recover) {
@@ -95,7 +95,7 @@ class BattleEvent {
         await utils.wait(600);
 
         //stop blinking
-        target.pizzaElement.classList.remove("battle-damage-blink");
+        who.pizzaElement.classList.remove("battle-damage-blink");
 
         resolve();
     }

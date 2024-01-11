@@ -49,13 +49,11 @@ class OverworldEvent {
     }
 
     textMessage(resolve) {
-        //console.log(this.event.text);
-
         if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
+            //get the direction opposite of the hero's direction to face to hero
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-
         const message = new TextMessage({
             text: this.event.text,
             onComplete: () => resolve(),
@@ -64,7 +62,6 @@ class OverworldEvent {
     }
 
     changeMap(resolve) {
-
         const sceneTransition = new SceneTransition();
 
         //container, callback
@@ -75,7 +72,6 @@ class OverworldEvent {
 
             sceneTransition.fadeOut();
         })
-
     }
 
     battle(resolve) {

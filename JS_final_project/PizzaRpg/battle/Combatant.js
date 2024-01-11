@@ -3,13 +3,16 @@
 class Combatant {
     constructor(config, battle) {
 
-        // config = {
-        //     hp: 100,
-        //     maxHp: 200,
-        //     xp: 34,
-        //     name: "Bingo",
-        //     actions: [],
-        // }
+        /*config = {...Pizzas.s001,
+            team: "player", //enemy
+            hp: 40,
+            maxHp: 50,
+            xp: 70,
+            maxXp:100,
+            level: 1,
+            status: null,
+            isPlayerControlled: true,
+            }*/
 
         Object.keys(config).forEach(key => {
             this[key] = config[key];
@@ -98,28 +101,30 @@ class Combatant {
 
     getPostEvents() {
         if (this.status?.type === "saucy") {
+            console.log(this,"suacy");
             return [
                 { type: "textMessage", text: "Feeling Saucy!" },
                 { type: "stateChange", recover: 5, onCaster: true },
             ]
         }
 
-        // if (this.status?.type === "clumsy") {
-        //     return [
-        //         { type: "textMessage", text: "Feeling Clumsy..." },
-        //         { type: "stateChange", damage: 5, onCaster: false },
-        //     ]
-        // }
+        if (this.status?.type === "clumsy") {
+            console.log(this,"clumsy");
+            return [
+                { type: "textMessage", text: "Feeling Clumsy..." },
+                { type: "stateChange", damage: 5, onCaster: true },
+            ]
+        }
         return [];
     }
 
     getReplacedEvents(originalEvents){
-        if(this.status?.type === "clumsy" && utils.randomFromArray([true,false])){
-            //replace event
-            return [
-                {type: "textMessage", text: `${this.name} flops over`}
-            ]
-        }
+        // if(this.status?.type === "clumsy" && utils.randomFromArray([true,false])){
+        //     //replace event
+        //     return [
+        //         {type: "textMessage", text: `${this.name} flops over`}
+        //     ]
+        // }
         return originalEvents;
     }
 

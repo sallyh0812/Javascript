@@ -7,27 +7,27 @@ class SubmissionMenu {
         this.onComplete = onComplete;
     }
 
-    getPages(){
+    getPages() {
 
-        const backOption ={
+        const backOption = {
             label: "Go Back",
             description: "Return to previous page",
-            handler:()=>{
+            handler: () => {
                 this.keyboardMenu.setOptions(this.getPages().root);
             }
         };
 
         return {
-            root:[
+            root: [
                 {
-                    label:"Attack",
-                    description:"Choose and attack",
-                    handler:()=>{
+                    label: "Attack",
+                    description: "Choose and attack",
+                    handler: () => {
                         //do sth when chosen
                         console.log("GO TO ATTACK PAGE");
                         this.keyboardMenu.setOptions(this.getPages().attacks);
                     },
-                    right:()=>{
+                    right: () => {
                         return "";
                     }
                 },
@@ -35,20 +35,20 @@ class SubmissionMenu {
                     label: "Items",
                     description: "Choose an item from your inventory",
                     disabled: false, //true
-                    handler:()=>{
+                    handler: () => {
                         this.keyboardMenu.setOptions(this.getPages().items);
                     }
                 },
                 {
                     label: "Swap",
                     description: "Change to other pizza",
-                    handler:()=>{
-                        
+                    handler: () => {
+
                     }
                 }
 
             ],
-            attacks:[
+            attacks: [
                 // {
                 //     label: "My first attack",
                 //     description: "Does this...",
@@ -56,12 +56,12 @@ class SubmissionMenu {
 
                 //     }
                 // },
-                ...this.caster.actions.map(key=>{
+                ...this.caster.actions.map(key => {
                     const action = Actions[key];
-                    return{
+                    return {
                         label: action.name,
                         description: action.description,
-                        handler:()=>{
+                        handler: () => {
                             this.menuSubmit(action);
                         }
                     }
@@ -75,19 +75,22 @@ class SubmissionMenu {
         }
     }
 
-    menuSubmit(action,instanceId=null){
+    menuSubmit(action, instanceId = null) {
 
         this.keyboardMenu?.end();
 
         this.onComplete({
             action: action,
-            target: action.targetType === "friendly" ? this.caster: this.enemy,
+            target: action.targetType === "friendly" ? this.caster : this.enemy,
         })
     }
 
     decide() {
         //TODO: enemies randomly choose what to do
-        this.menuSubmit(Actions[this.caster.actions[0]]);
+        this.menuSubmit(Actions[utils.randomFromArray(this.caster.actions)]); //this.caster.actions[0]
+        /*randomFromArray(arr){
+        return arr[Math.floor(Math.random()*arr.length)];
+    } */
     }
 
     showMenu(container) {
