@@ -75,16 +75,18 @@ class BattleEvent {
     async replace(resolve){
         console.log("replace");
         const {replacement} = this.event;
-        console.log("replacement",replacement);
-        console.log("replacement.team",replacement.team);
         const prevCmbt = this.battle.combatants[this.battle.activeCombatants[replacement.team]];
-        console.log("prevCmbt:",prevCmbt);
+        //console.log("prevCmbt:",prevCmbt);
 
         this.battle.activeCombatants[replacement.team] = null;
+        this.battle.activeCombatants[replacement.team] = replacement.id;
+
+        
+        this.battle.playerTeam.update();
+        this.battle.enemyTeam.update();
+
         prevCmbt.update();
         await utils.wait(400);
-
-        this.battle.activeCombatants[replacement.team] = replacement.id;
         replacement.update();
         await utils.wait(400);
 
@@ -131,9 +133,11 @@ class BattleEvent {
         //wait
         await utils.wait(600);
 
+        this.battle.playerTeam.update();
+        this.battle.enemyTeam.update();
+
         //stop blinking
         who.pizzaElement.classList.remove("battle-damage-blink");
-
         resolve();
     }
 

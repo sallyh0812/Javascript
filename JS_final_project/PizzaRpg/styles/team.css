@@ -1,0 +1,40 @@
+.team{
+    transform: scale(2);
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 8px;
+}
+
+.team > div{
+    display: flex;
+    flex-direction: column;
+}
+
+.team[data-team="player"]{
+    left: 12px;
+}
+
+.team[data-team="enemy"]{
+    right: 12px;
+}
+
+.dead-pizza{
+    position: absolute;
+    display: none;
+    top: 0;
+}
+
+.indicator{
+    position: relative;
+    top: -1px;
+    display: none;
+}
+
+.team [data-dead="true"] .dead-pizza{
+    display: block;
+}
+
+.team [data-active="true"] .indicator{
+    display: block;
+}
