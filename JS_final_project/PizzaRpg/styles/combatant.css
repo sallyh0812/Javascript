@@ -7,6 +7,7 @@
 
 .battle .combatant{
     transform: scale(2);
+    transition: opacity 0.4s;
 }
 
 .battle .combatant[data-active = "false"]{
@@ -129,6 +130,7 @@
     position:absolute;
     transform: scale(2);
     background: url(/img/characters/pizzas/pizza-shadow.png) no-repeat no-repeat;
+    transition: opacity 0.4s, transform 0.4s;
 }
 
 .pizza[data-team = "player"]{
@@ -143,8 +145,10 @@
 
 .pizza[data-active = "false"]{
     opacity: 0;
+    transform: translate3d(0,16px,0) scale(2); /*fade downwards*/
 }
 
 .pizza[data-active = "true"]{
     opacity: 1;
+    transform: translate3d(0,0,0) scale(2);
 }

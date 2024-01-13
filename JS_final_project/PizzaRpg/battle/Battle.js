@@ -11,9 +11,21 @@ class Battle {
                 */
 
                 team: "player", //enemy
-                hp: 40,
+                hp: 10,
                 maxHp: 50,
                 xp: 70,
+                maxXp:100,
+                level: 1,
+                status: null,
+                isPlayerControlled: true,
+            }, this),
+
+            "player2": new Combatant({
+                ...Pizzas.s002,
+                team: "player", //enemy
+                hp: 50,
+                maxHp: 50,
+                xp: 0,
                 maxXp:100,
                 level: 1,
                 status: null,
@@ -23,7 +35,7 @@ class Battle {
             "enemy1": new Combatant({
                 ...Pizzas["v001"],
                 team: "enemy",
-                hp: 40,
+                hp: 1,
                 maxHp: 50,
                 xp: 50,
                 maxXp:50,

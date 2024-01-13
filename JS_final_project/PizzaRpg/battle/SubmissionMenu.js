@@ -1,10 +1,18 @@
 "use strict";
 
 class SubmissionMenu {
-    constructor({ caster, enemy, onComplete, items }) {
+    constructor({ caster, enemy, onComplete, items, replacements }) {
         this.caster = caster;
         this.enemy = enemy;
         this.onComplete = onComplete;
+
+        this.replacements = replacements;
+        /* from battle_event -> submissionMenu(resolve)
+            replacements: Object.values(this.battle.combatants).filter(cmbt=>{
+                return cmbt.id !== caster.id && cmbt.team === caster.team && cmbt.hp>0;
+            }), */
+        console.log("this.replacements:",this.replacements);
+        
         let itemQuantityMap = {};
         items.forEach(item => {
             if (item.team === caster.team) {
@@ -20,7 +28,6 @@ class SubmissionMenu {
                 }
             }
         });
-        console.log(itemQuantityMap);
         this.items = Object.values(itemQuantityMap);
         console.log(this.items);
     }
@@ -60,7 +67,7 @@ class SubmissionMenu {
                     label: "Swap",
                     description: "Change to other pizza",
                     handler: () => {
-
+                        this.keyboardMenu.setOptions(this.getPages().replacements);
                     }
                 }
 
@@ -100,14 +107,33 @@ class SubmissionMenu {
                     }
                 }),
                 backOption
+            ],
+            replacements: [
+                ...this.replacements.map(replacement => {
+                    return {
+                        label: replacement.name,
+                        description: replacement.description,
+                        handler: () => {
+                            this.menuSubmitReplacement(replacement);
+                        }
+                    }
+                }),
+                backOption
             ]
         }
     }
 
-    menuSubmit(action, instanceId = null) {
-
+    menuSubmitReplacement(replacement){
+        console.log("menuSubmitReplacement");
         this.keyboardMenu?.end();
+        this.onComplete({
+            replacement,
+        })
+    }
 
+    menuSubmit(action, instanceId = null) {
+        console.log("menuSubmit");
+        this.keyboardMenu?.end();
         this.onComplete({
             action: action,
             target: action.targetType === "friendly" ? this.caster : this.enemy,

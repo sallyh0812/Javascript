@@ -30,6 +30,19 @@ class TurnCycle {
             enemy: enemy,
         });
 
+        if(submission.replacement){
+            await this.onNewEvent({
+                type: "replace", 
+                replacement: submission.replacement,
+            });
+
+            await this.onNewEvent({
+                type: "textMessage", 
+                text: `Go get them, ${submission.replacement.name}!`,
+            });
+            this.nextTurn();
+        }
+
         console.log("submission from turnCycle.js:",submission);
         if(submission.instanceId){
             //delete the item with the instanceId
@@ -39,11 +52,8 @@ class TurnCycle {
         const resultingEvent = submission.action.success; //caster.getReplacedEvents(submission.action.success);
         /*success: [
             {type: "textMessage", text: "{Pizza} uses Whomp!"},
-            {type: "animation", animation: "toBeDefined"},
-            {type: "textMessage", text: "Something happend!"},
             {type: "stateChange", damage: 10},
         ], */
-
 
         for (let i = 0; i < resultingEvent.length; i++) {
             const event = {
@@ -53,11 +63,43 @@ class TurnCycle {
                 caster: caster,
                 target: submission.target,
             }
-            // console.log(`event.caster.name from turnCycle: ${event.caster.name}`);
-            // console.log(`event.action.name from turnCycle: ${event.action.name}`);
-            // console.log(`event.target.name from turnCycle: ${event.target.name}`);
-
+            // console.log(`event.caster,enemy.name from turnCycle: ${event.caster.name},${event.target.name}`);
             await this.onNewEvent(event);
+        }
+
+        //sb die?
+        const targetDie = submission.target.hp <=0;
+        if(targetDie){
+            await this.onNewEvent(
+                {type: "textMessage", text: `${submission.target.name} is ruined...`},
+            )
+        }
+        //winning team? end battle
+        const winner = this.getWinner();
+        if(winner){
+            await this.onNewEvent({
+                type: "textMessage", 
+                text: "Hurray! You saved the pizza world!",
+            });
+            return;
+        }
+
+        //bring replacement if no winning team
+        if(targetDie){
+            const replacement = await this.onNewEvent({
+                type: "replacementMenu",
+                team: submission.target.team,
+            });
+
+            await this.onNewEvent({
+                type: "replace", 
+                replacement: replacement,
+            });
+
+            await this.onNewEvent({
+                type: "textMessage", 
+                text: `${replacement.name} comes!`,
+            });
         }
 
         
@@ -75,15 +117,33 @@ class TurnCycle {
             await this.onNewEvent(event);
         }
 
+        //
+        const casterDie = caster.hp >=0;
+
         //check for status expire
         const expiredEvent = caster.decrementStatus();
         if(expiredEvent){
             await this.onNewEvent(expiredEvent);
         }
 
+        this.nextTurn();
+    }
+
+    nextTurn(){
         this.currentTeam = this.currentTeam === "player" ? "enemy": "player";
         this.turn();
+    }
 
+    getWinner(){
+        let aliveTeams = {};
+        Object.values(this.battle.combatants).forEach(cmbt =>{
+            if(cmbt.hp>0){
+                aliveTeams[cmbt.team] = true;
+            }
+        });
+        if(!aliveTeams["player"]) {return "enemy"};
+        if(!aliveTeams["enemy"]) {return "player"};
+        return null;
     }
 
     async init() {

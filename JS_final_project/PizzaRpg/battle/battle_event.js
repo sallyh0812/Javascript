@@ -43,16 +43,52 @@ class BattleEvent {
 
     submissionMenu(resolve) {
         console.log("submission menu");
+        const {caster} = this.event;
         const menu = new SubmissionMenu({
             caster: this.event.caster,
             enemy: this.event.enemy,
             items: this.battle.items,
+            replacements: Object.values(this.battle.combatants).filter(cmbt=>{
+                return cmbt.id !== caster.id && cmbt.team === caster.team && cmbt.hp>0;
+            }),
             onComplete: submission => {
                 //submission {what to use , who to use it on}
                 resolve(submission);
             }
         });
         menu.init(this.battle.element);
+    }
+
+    replacementMenu(resolve) {
+        console.log("replacement menu");
+        const menu = new ReplacementMenu({
+            replacements: Object.values(this.battle.combatants).filter(cmbt=>{
+                return cmbt.team === this.event.team && cmbt.hp>0;
+            }),
+            onComplete: replacement => {
+                resolve(replacement);
+            }
+        });
+        menu.init(this.battle.element);
+    }
+
+    async replace(resolve){
+        console.log("replace");
+        const {replacement} = this.event;
+        console.log("replacement",replacement);
+        console.log("replacement.team",replacement.team);
+        const prevCmbt = this.battle.combatants[this.battle.activeCombatants[replacement.team]];
+        console.log("prevCmbt:",prevCmbt);
+
+        this.battle.activeCombatants[replacement.team] = null;
+        prevCmbt.update();
+        await utils.wait(400);
+
+        this.battle.activeCombatants[replacement.team] = replacement.id;
+        replacement.update();
+        await utils.wait(400);
+
+        resolve();
     }
 
     async stateChange(resolve) {
