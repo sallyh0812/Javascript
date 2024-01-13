@@ -51,6 +51,6 @@ window.Pizzas ={
         type: PizzaTypes.fungi,
         src: "/img/characters/pizzas/f001.png",
         icon: "img/icons/fungi.png",
-        actions:["damage1"],
+        actions:["damage1", "saucyStatus","clumsyStatus",],
     },
 }

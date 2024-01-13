@@ -43,13 +43,13 @@ class BattleEvent {
 
     submissionMenu(resolve) {
         console.log("submission menu");
-        const {caster} = this.event;
+        const { caster } = this.event;
         const menu = new SubmissionMenu({
             caster: this.event.caster,
             enemy: this.event.enemy,
             items: this.battle.items,
-            replacements: Object.values(this.battle.combatants).filter(cmbt=>{
-                return cmbt.id !== caster.id && cmbt.team === caster.team && cmbt.hp>0;
+            replacements: Object.values(this.battle.combatants).filter(cmbt => {
+                return cmbt.id !== caster.id && cmbt.team === caster.team && cmbt.hp > 0;
             }),
             onComplete: submission => {
                 //submission {what to use , who to use it on}
@@ -62,8 +62,8 @@ class BattleEvent {
     replacementMenu(resolve) {
         console.log("replacement menu");
         const menu = new ReplacementMenu({
-            replacements: Object.values(this.battle.combatants).filter(cmbt=>{
-                return cmbt.team === this.event.team && cmbt.hp>0;
+            replacements: Object.values(this.battle.combatants).filter(cmbt => {
+                return cmbt.team === this.event.team && cmbt.hp > 0;
             }),
             onComplete: replacement => {
                 resolve(replacement);
@@ -72,16 +72,38 @@ class BattleEvent {
         menu.init(this.battle.element);
     }
 
-    async replace(resolve){
+    async getXp(resolve) {
+        const { combatant } = this.event;
+        let getXp = this.event.xp;
+        const step = () => {
+            if (getXp > 0) {
+                getXp -= 1;
+                combatant.xp += 1;
+                if(combatant.xp >= combatant.maxXp){
+                    combatant.level += 1;
+                    combatant.xp = 0;
+                    combatant.maxXp = 100; //for next level
+                }
+                
+                combatant.update();
+                requestAnimationFrame(step);
+                return;
+            }
+            resolve();
+        }
+        requestAnimationFrame(step);
+    }
+
+    async replace(resolve) {
         console.log("replace");
-        const {replacement} = this.event;
+        const { replacement } = this.event;
         const prevCmbt = this.battle.combatants[this.battle.activeCombatants[replacement.team]];
         //console.log("prevCmbt:",prevCmbt);
 
         this.battle.activeCombatants[replacement.team] = null;
         this.battle.activeCombatants[replacement.team] = replacement.id;
 
-        
+
         this.battle.playerTeam.update();
         this.battle.enemyTeam.update();
 

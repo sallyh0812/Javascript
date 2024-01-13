@@ -31,6 +31,10 @@ class Combatant {
         return percent > 0 ? percent : 0;
     }
 
+    get giveXp(){
+        return this.level * 10;
+    }
+
     get isActive() {
         return this.battle.activeCombatants[this.team] === this.id;
     }

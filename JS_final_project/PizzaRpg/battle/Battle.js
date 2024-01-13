@@ -13,8 +13,8 @@ class Battle {
                 team: "player", //enemy
                 hp: 10,
                 maxHp: 50,
-                xp: 70,
-                maxXp:100,
+                xp: 75,
+                maxXp:80,
                 level: 1,
                 status: null,
                 isPlayerControlled: true,
