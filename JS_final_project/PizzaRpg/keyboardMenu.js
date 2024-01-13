@@ -9,8 +9,9 @@ class KeyboardMenu {
     }
 
     setOptions(options) {
+        //in SubmissionMenu.js -> this.keyboardMenu.setOptions(this.getPages().root);
         this.options = options;
-        console.log(`this.options: ${this.options}`);
+        console.log(`this.options[0].handler: ${this.options[0].handler}`);
         this.element.innerHTML = this.options.map((option, index) => {
             const disabledAttr = option.disabled ? "disabled" : "";
             return (`

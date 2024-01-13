@@ -83,10 +83,10 @@ class Overworld {
         this.startGameLoop();
 
         this.map.startCutscene([
-            {who: "npc1", type: "stand", direction:"down", time: 800},
-            {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
+            // {who: "npc1", type: "stand", direction:"down", time: 800},
+            // {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
             // {type: "changeMap", map: "DemoRoom"},
-            //{type: "battle"},
+            {type: "battle"},
         ]);
 
         console.log("Hello from the Overworld!", this);

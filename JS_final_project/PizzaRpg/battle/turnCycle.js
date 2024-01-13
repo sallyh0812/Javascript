@@ -30,6 +30,12 @@ class TurnCycle {
             enemy: enemy,
         });
 
+        console.log("submission from turnCycle.js:",submission);
+        if(submission.instanceId){
+            //delete the item with the instanceId
+            this.battle.items = this.battle.items.filter(i => i.instanceId !== submission.instanceId);
+        }
+
         const resultingEvent = submission.action.success; //caster.getReplacedEvents(submission.action.success);
         /*success: [
             {type: "textMessage", text: "{Pizza} uses Whomp!"},
@@ -75,54 +81,16 @@ class TurnCycle {
             await this.onNewEvent(expiredEvent);
         }
 
-        if(enemy.hp<=0){
-            await this.onNewEvent({
-                type: "textMessage",
-                text: "Game over..."
-            });
-            if(enemy.team === "player"){
-                await this.onNewEvent({
-                    type: "textMessage",
-                    text: "You lose the battle..."
-                });
-            }else{
-                await this.onNewEvent({
-                    type: "textMessage",
-                    text: "You win the battle! Thanks for saving the pizza wonderland!"
-                });
-            }
-            location.reload();
-        }
-
-        else if(caster.hp<=0){
-            await this.onNewEvent({
-                type: "textMessage",
-                text: "Game over..."
-            });
-            if(caster.team === "player"){
-                await this.onNewEvent({
-                    type: "textMessage",
-                    text: "You lose the battle..."
-                });
-            }else{
-                await this.onNewEvent({
-                    type: "textMessage",
-                    text: "You win the battle! Thanks for saving the pizza wonderland!"
-                });
-            }
-            location.reload();
-        }
-
         this.currentTeam = this.currentTeam === "player" ? "enemy": "player";
         this.turn();
 
     }
 
     async init() {
-        // await this.onNewEvent({
-        //     type: "textMessage",
-        //     text: "The battle is starting!",
-        // });
+        await this.onNewEvent({
+            type: "textMessage",
+            text: "Battle starts!",
+        });
 
         //start the first turn
         this.turn();
