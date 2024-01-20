@@ -59,8 +59,6 @@ class OverworldMap {
 
         this.isCutscenePlaying = false;
 
-        //console.log("stop cut scene");
-
         //reset npc to do behavior
         Object.values(this.gameObjects).forEach(obj => {
             obj.doBehaviorEvent(this);
@@ -83,7 +81,6 @@ class OverworldMap {
     checkForFootstepCutscene() {
         const hero = this.gameObjects["hero"];
         const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
-        //console.log(match);
 
         if (match && !this.isCutscenePlaying) {
             this.startCutscene(match[0].events);
@@ -145,7 +142,6 @@ window.OverworldMaps = {
                             { type: "textMessage", text: "Finally... We need some help!", faceHero: "npc1" },
                             { type: "textMessage", text: "Go find and beat the bad guy in the kitchen..." },
                             { who: "npc1", type: "stand", direction: "down", time: 500 },
-                            //{ type: "battle", enemyId: "jane" },
                         ],
                     },
                 ],

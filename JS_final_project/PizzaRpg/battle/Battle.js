@@ -1,50 +1,14 @@
 class Battle {
     constructor({ enemy, onComplete }) {
-        this.enemy = enemy,
-            //enemy: enemies[this.event.enemyId],
-            this.onComplete = onComplete;
-        this.combatants = {
-            /*"player1": new Combatant({
-                ...Pizzas.s001,
-                
-                // name: "Slice Samuri",
-                // type: PizzaTypes.spicy,
-                // src: "/img/characters/pizzas/s001.png",
-                // icon: "img/icons/spicy.png",
- 
-                team: "player", //enemy
-                hp: 10,
-                maxHp: 50,
-                xp: 75,
-                maxXp:80,
-                level: 1,
-                status: null,
-                isPlayerControlled: true,
-            }, this),
- 
-            "player2": new Combatant({...}, this),
- 
-            "enemy1": new Combatant({...}, this),
-            */
-        };
+        this.enemy = enemy;
+        //enemy: enemies[this.event.enemyId],
+        this.onComplete = onComplete;
 
+        this.combatants = {};
         this.activeCombatants = {
             player: null,
             enemy: null,
         };
-
-        this.items = [];
-
-        //dynamically add items for player team
-        window.playerState.items.forEach(item => {
-            this.items.push({
-                ...item,
-                team: "player",
-            })
-        });
-
-        this.usedItemIds = {};
-
         //dynamically add the player team
         window.playerState.lineup.forEach(id => {
             this.addCombatant(id, "player", window.playerState.pizzas[id]);
@@ -53,6 +17,16 @@ class Battle {
         //dynamically add the enemy team
         Object.keys(this.enemy.pizzas).forEach(key => {
             this.addCombatant("e_" + key, "enemy", this.enemy.pizzas[key]);
+        });
+
+        this.items = [];
+        this.usedItemIds = {};
+        //dynamically add items for player team
+        window.playerState.items.forEach(item => {
+            this.items.push({
+                ...item,
+                team: "player",
+            })
         });
     }
 
@@ -68,7 +42,7 @@ class Battle {
         let pizza = window.playerState.pizzas[activePlayerId];
         if (pizza) {
             this.activeCombatants[team] = (pizza.hp > 0) ? activePlayerId : id;
-        }else{
+        } else {
             this.activeCombatants[team] = id;
         }
 
@@ -129,7 +103,6 @@ class Battle {
                             playerStatePizza.xp = combatant.xp;
                             playerStatePizza.maxXp = combatant.maxXp;
                             playerStatePizza.level = combatant.level;
-                            //playerStatePizza.status = combatant.status;
                         }
                     });
 
@@ -138,7 +111,6 @@ class Battle {
                         return this.usedItemIds[i.itemId] !== true
                     });
                 }
-
                 this.element.remove();
                 this.onComplete();
             }

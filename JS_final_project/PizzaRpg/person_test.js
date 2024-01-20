@@ -19,15 +19,12 @@ class Person extends GameObject {
     }
 
     update(state) {
-        if (this.id === "npc1") {
-            //console.log(this.movingProgressRemaining);
-        }
         if (this.movingProgressRemaining > 0) {
             this.updatePosition(state);
         } else {
             //more casese for starting to walk
 
-            //Case: we're keyboard ready and have arrow pressed
+            //Case: keyboard ready and have arrow pressed
             if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
                 //console.log(state.arrow);
                 this.startBehavior(state, {
@@ -47,13 +44,11 @@ class Person extends GameObject {
         if (behavior.type === "walk") {
             //stop if space is not free
             if (state.map.isSpaceTaken(this.x, this.y, this.direction) && this.movingProgressRemaining === 0) {
-                //this.movingProgressRemaining = 0;
                 if (behavior.retry) {
                     setTimeout(() => {
                         this.startBehavior(state, behavior);
                     }, 10);
                 }
-                //console.log("retry");
                 return;
             }
             //ready to walk
@@ -62,8 +57,6 @@ class Person extends GameObject {
             this.updateSprite();
         }
         if (behavior.type === "stand") {
-            //console.log("start behavior stand");
-
             this.isStanding = true;
 
             setTimeout(() => {

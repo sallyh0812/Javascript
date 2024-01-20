@@ -110,27 +110,22 @@ class Combatant {
 
     getPostEvents() {
         if (this.status?.type === "saucy") {
-            //console.log(this, "suacy");
             return [
                 { type: "textMessage", text: "Feeling Saucy!" },
                 { type: "stateChange", recover: 5, onCaster: true },
             ]
         }
-
         if (this.status?.type === "clumsy") {
-            //console.log(this, "clumsy");
             return [
                 { type: "textMessage", text: "Feeling Clumsy..." },
                 { type: "stateChange", damage: 5, onCaster: true },
             ]
         }
-        
         if(this.status?.type === "spicy"){
             return [
                 { type: "textMessage", text: "Feeling Spicy... (attack weakened)" },
             ]
         }
-
         if(this.status?.type === "magic"){
             return [
                 { type: "textMessage", text: "Feeling powerful!" },

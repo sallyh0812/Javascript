@@ -73,12 +73,6 @@ class SubmissionMenu {
 
             ],
             attacks: [
-                // {
-                //     label: "My first attack",
-                //     description: "Does this...",
-                //     handler: ()=>{
-                //     }
-                // },
                 ...this.caster.actions.map(key => {
                     const action = window.Actions[key];
                     return {
@@ -147,11 +141,7 @@ class SubmissionMenu {
     }
 
     decide() {
-        //TODO: enemies randomly choose what to do
         this.menuSubmit(Actions[utils.randomFromArray(this.caster.actions)]); //this.caster.actions[0]
-        /*randomFromArray(arr){
-        return arr[Math.floor(Math.random()*arr.length)];
-        } */
     }
 
     showMenu(container) {

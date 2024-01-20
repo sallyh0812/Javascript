@@ -80,9 +80,7 @@ class Sprite {
         if (this.isShadowLoaded) {
             ctx.drawImage(this.shadow, x, y,)
         }
-
         const [frameX, frameY] = this.frame;
-
         if (this.isLoaded) {
             ctx.drawImage(this.image,
                 frameX * 32, frameY * 32,
@@ -94,7 +92,6 @@ class Sprite {
         } else {
             //console.log("draw failed");
         }
-
         this.updateAnimationProgress();
     }
 }

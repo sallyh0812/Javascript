@@ -4,14 +4,6 @@ class TurnCycle {
     constructor({ battle, onNewEvent, onWinner }) {
         this.battle = battle;
         this.onNewEvent = onNewEvent;
-        /* from battle.js
-            onNewEvent: event =>{
-                return new Promise(resolve=>{
-                const battleEvent = new BattleEvent(event, this);
-                battleEvent.init(resolve);
-            })
-        }*/
-
         this.onWinner = onWinner;
         this.currentTeam = "player"; // enemy
     }
@@ -181,7 +173,7 @@ class TurnCycle {
             else {
                 const replacement = await this.onNewEvent({
                     type: "replacementMenu",
-                    team: submission.target.team,
+                    team: caster.team,
                 });
 
                 await this.onNewEvent({

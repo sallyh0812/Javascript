@@ -30,7 +30,6 @@ class Team {
             icon.setAttribute("data-dead", cmbt.hp<=0);
             icon.setAttribute("data-active", cmbt.isActive);
         })
-
     }
 
     init(container) {

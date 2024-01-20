@@ -16,7 +16,6 @@ window.enemies = {
             }
         }
     },
-
     "Jackie": {
         name: "Jackie",
         src: "/img/characters/people/erio.png",

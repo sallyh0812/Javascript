@@ -15,7 +15,7 @@ window.Pizzas ={
         type: PizzaTypes.spicy,
         src: "/img/characters/pizzas/s001.png",
         icon: "/img/icons/spicy.png",
-        actions:["damage1","damage2","saucy","saucyStatus2","clumsyStatus","spicyStatus"],
+        actions:["damage1","saucy","damage2","clumsyStatus","spicyStatus","saucyStatus2"],
     },
     s002:{
         name: "Bacon Brigade",
@@ -23,7 +23,7 @@ window.Pizzas ={
         type: PizzaTypes.spicy,
         src: "/img/characters/pizzas/s002.png",
         icon: "/img/icons/spicy.png",
-        actions:["damage1","damage2","saucy","saucyStatus2","clumsyStatus","spicyStatus"]//,"damage2","saucyStatus","saucyStatus2","clumsyStatus",],
+        actions:["damage1","saucy","damage2","clumsyStatus","spicyStatus","saucyStatus2",]//,"damage2","saucyStatus","saucyStatus2","clumsyStatus",],
     },
     v001:{
         name: "Florentine",
@@ -31,7 +31,7 @@ window.Pizzas ={
         type: PizzaTypes.veggie,
         src: "/img/characters/pizzas/v001.png",
         icon: "img/icons/veggie.png",
-        actions:["damage1","damage2","saucy","clumsyStatus",],
+        actions:["damage1","saucy","damage2","clumsyStatus",],
     },
     v002:{
         name: "Friarielli Broccoli",
@@ -39,7 +39,7 @@ window.Pizzas ={
         type: PizzaTypes.veggie,
         src: "/img/characters/pizzas/v001.png",
         icon: "img/icons/veggie.png",
-        actions:["damage1","damage2","damage3","saucy","clumsyStatus",],
+        actions:["damage1","saucy","damage2","clumsyStatus","damage3"],
     },
     f001:{
         name: "Portobello Express",
@@ -47,6 +47,6 @@ window.Pizzas ={
         type: PizzaTypes.fungi,
         src: "/img/characters/pizzas/f001.png",
         icon: "img/icons/fungi.png",
-        actions:["damage1","damage2","saucy","saucyStatus2","clumsyStatus","magicStatus"],
+        actions:["damage1","saucy","damage2","clumsyStatus","magicStatus"],
     },
 }

@@ -31,7 +31,6 @@ class Overworld {
             Object.values(this.map.gameObjects).sort((a, b) => {
                 return a.y - b.y;       //if return >0: b->a, <0: a->b
             }).forEach(object => {
-                //object.x += 1;
                 object.sprite.draw(this.ctx, cameraPerson);
             })
 
@@ -55,7 +54,6 @@ class Overworld {
     bindHeroPositionCheck() {
         //"PersonWalkingComplete" defined in person.js
         document.addEventListener("PersonWalkingComplete", e => {
-
             if (e.detail.whoId === 'hero') {
                 //console.log("hero's position changed.")
                 this.map.checkForFootstepCutscene()
