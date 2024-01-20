@@ -27,19 +27,21 @@ class OverworldEvent {
         document.addEventListener("PersonStandComplete", completeHandler);
     }
 
-    walk(resolve) {
+    async walk(resolve) {
         const who = this.map.gameObjects[this.event.who] //this.event.who ->　obj.id
-        who.startBehavior({     //startBehavior(state, behavior)
-            map: this.map
-        }, {
+        //startBehavior(state, behavior)
+        await who.startBehavior({map: this.map}, {
             type: "walk",
             direction: this.event.direction,
             retry: true,
-        })
+        });
 
         //set up a handler to complete when correct person is done walking then resolve the event
         const completeHandler = e => {
             if (e.detail.whoId === this.event.who) {
+                if(e.detail.whoId === "npc1"){
+                    console.log("walking complete");
+                }
                 document.removeEventListener("PersonWalkingComplete", completeHandler);
                 resolve();
             }
@@ -76,6 +78,7 @@ class OverworldEvent {
 
     battle(resolve) {
         const battle = new Battle({
+            enemy: window.enemies[this.event.enemyId],
             onComplete: () => {
                 resolve();
             }

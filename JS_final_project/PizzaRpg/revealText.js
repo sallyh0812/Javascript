@@ -33,7 +33,7 @@ class RevealText {
     }
 
     init() {
-        console.log("reveal text init");
+        //console.log("reveal text init");
         let characters = [];
         this.text.split("").forEach(character => {
 

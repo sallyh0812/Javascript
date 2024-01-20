@@ -11,7 +11,7 @@ class SubmissionMenu {
             replacements: Object.values(this.battle.combatants).filter(cmbt=>{
                 return cmbt.id !== caster.id && cmbt.team === caster.team && cmbt.hp>0;
             }), */
-        console.log("this.replacements:",this.replacements);
+        //console.log("this.replacements:",this.replacements);
         
         let itemQuantityMap = {};
         items.forEach(item => {
@@ -23,13 +23,13 @@ class SubmissionMenu {
                     itemQuantityMap[item.actionId] = {
                         actionId: item.actionId,
                         quantity: 1,
-                        instanceId: item.instanceId,
+                        itemId: item.itemId,
                     }
                 }
             }
         });
         this.items = Object.values(itemQuantityMap);
-        console.log(this.items);
+        //console.log(this.items);
     }
 
     getPages() {
@@ -48,7 +48,7 @@ class SubmissionMenu {
                     description: "Choose and attack",
                     handler: () => {
                         //do sth when chosen
-                        console.log("GO TO ATTACK PAGE");
+                        //console.log("GO TO ATTACK PAGE");
                         this.keyboardMenu.setOptions(this.getPages().attacks);
                     },
                     right: () => {
@@ -80,10 +80,11 @@ class SubmissionMenu {
                 //     }
                 // },
                 ...this.caster.actions.map(key => {
-                    const action = Actions[key];
+                    const action = window.Actions[key];
                     return {
                         label: action.name,
                         description: action.description,
+                        disabled: action.alwaysAvailable? false : utils.randomFromArray([true,false]),
                         handler: () => {
                             this.menuSubmit(action);
                         }
@@ -94,7 +95,7 @@ class SubmissionMenu {
             items: [
                 //items
                 ...this.items.map(item => {
-                    const action = Actions[item.actionId];
+                    const action = window.Actions[item.actionId];
                     return {
                         label: action.name,
                         description: action.description,
@@ -102,7 +103,7 @@ class SubmissionMenu {
                             return `x${item.quantity}`;
                         },
                         handler: () => {
-                            this.menuSubmit(action, item.instanceId);
+                            this.menuSubmit(action, item.itemId);
                         }
                     }
                 }),
@@ -124,20 +125,20 @@ class SubmissionMenu {
     }
 
     menuSubmitReplacement(replacement){
-        console.log("menuSubmitReplacement");
+        //console.log("menuSubmitReplacement");
         this.keyboardMenu?.end();
         this.onComplete({
             replacement,
         })
     }
 
-    menuSubmit(action, instanceId = null) {
-        console.log("menuSubmit");
+    menuSubmit(action, itemId = null) {
+        //console.log("menuSubmit");
         this.keyboardMenu?.end();
         this.onComplete({
             action: action,
             target: action.targetType === "friendly" ? this.caster : this.enemy,
-            instanceId,
+            itemId,
         });
         /*  from battle_event.js -> submissionMenu(resolve)
             onComplete: submission => {
@@ -154,7 +155,7 @@ class SubmissionMenu {
     }
 
     showMenu(container) {
-        console.log("showMenu");
+        //console.log("showMenu");
         //console.log(`this.getPages.root[0].label: ${this.getPages().root[0].label}`);
         this.keyboardMenu = new KeyboardMenu();
         this.keyboardMenu.init(container);

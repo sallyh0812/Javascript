@@ -30,7 +30,7 @@ class TextMessage {
         });
 
         this.actionListener = new KeyPressListener("Enter", () => {
-            console.log("Enter when text message");
+            //console.log("Enter when text message");
             this.done();
         })
     }
@@ -46,7 +46,7 @@ class TextMessage {
     }
 
     init(container) {
-        console.log("Text message init");
+        //console.log("Text message init");
         this.createElement();
         container.appendChild(this.element);
         this.reavealingText.init();

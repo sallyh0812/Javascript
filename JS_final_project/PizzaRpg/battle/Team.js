@@ -25,7 +25,7 @@ class Team {
 
     update() {
         this.combatants.forEach(cmbt=>{
-            console.log(cmbt.id, cmbt.isActive);
+            //console.log(cmbt.id, cmbt.isActive);
             const icon = this.element.querySelector(`[data-combatant=${cmbt.id}]`);
             icon.setAttribute("data-dead", cmbt.hp<=0);
             icon.setAttribute("data-active", cmbt.isActive);

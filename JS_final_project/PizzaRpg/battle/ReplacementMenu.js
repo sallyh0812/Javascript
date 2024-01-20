@@ -11,7 +11,7 @@ class ReplacementMenu {
     }
 
     menuSubmit(replacement) {
-        console.log("menuSubmit");
+        //console.log("menuSubmit");
         this.keyboardMenu?.end();
         this.onComplete(
             replacement,
@@ -21,7 +21,7 @@ class ReplacementMenu {
     showMenu(container) {
         this.keyboardMenu = new KeyboardMenu();
         this.keyboardMenu.init(container);
-        console.log("this.replacements:", this.replacements);
+        //console.log("this.replacements:", this.replacements);
         this.keyboardMenu.setOptions(this.replacements.map(cmbt => {
             return {
                 label: cmbt.name,

@@ -11,7 +11,7 @@ class KeyboardMenu {
     setOptions(options) {
         //in SubmissionMenu.js -> this.keyboardMenu.setOptions(this.getPages().root);
         this.options = options;
-        console.log(`this.options:`, this.options);
+        //console.log(`this.options:`, this.options);
         this.element.innerHTML = this.options.map((option, index) => {
             const disabledAttr = option.disabled ? "disabled" : "";
             return (`
@@ -24,7 +24,7 @@ class KeyboardMenu {
 
         this.element.querySelectorAll("button").forEach(btn => {
             btn.addEventListener("click", () => {
-                console.log(btn.dataset.button); //the index
+                //console.log(btn.dataset.button); //the index
                 const chosenOption = this.options[Number(btn.dataset.button)];
                 chosenOption.handler();
             });
@@ -69,7 +69,7 @@ class KeyboardMenu {
 
         this.up = new KeyPressListener("ArrowUp",()=>{
             const current = Number(this.prevFocus.dataset.button); /*.getAttribute("data-button")*/
-            console.log(current);
+            //console.log(current);
             const prevBtn = Array.from(this.element.querySelectorAll("button[data-button]")).reverse().find(ele=>{
                 return ele.dataset.button < current && !ele.disabled;
             });
@@ -78,7 +78,7 @@ class KeyboardMenu {
         
         this.down = new KeyPressListener("ArrowDown",()=>{
             const current = Number(this.prevFocus.dataset.button); /*.getAttribute("data-button")*/
-            console.log(current);
+            //console.log(current);
             const nextBtn = Array.from(this.element.querySelectorAll("button[data-button]")).find(ele=>{
                 return ele.dataset.button > current && !ele.disabled;
             });

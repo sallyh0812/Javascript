@@ -12,11 +12,11 @@
 }
 
 .team[data-team="player"]{
-    left: 12px;
+    left: 18px;
 }
 
 .team[data-team="enemy"]{
-    right: 12px;
+    right: 15px;
 }
 
 .dead-pizza{

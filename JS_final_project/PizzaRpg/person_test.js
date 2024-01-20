@@ -19,8 +19,11 @@ class Person extends GameObject {
     }
 
     update(state) {
+        if (this.id === "npc1") {
+            //console.log(this.movingProgressRemaining);
+        }
         if (this.movingProgressRemaining > 0) {
-            this.updatePosition();
+            this.updatePosition(state);
         } else {
             //more casese for starting to walk
 
@@ -43,27 +46,28 @@ class Person extends GameObject {
 
         if (behavior.type === "walk") {
             //stop if space is not free
-            if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-                //if (behavior.retry)
-                behavior.retry && setTimeout(()=>{
-                    this.startBehavior(state, behavior)
-                },10);
+            if (state.map.isSpaceTaken(this.x, this.y, this.direction) && this.movingProgressRemaining === 0) {
+                //this.movingProgressRemaining = 0;
+                if (behavior.retry) {
+                    setTimeout(() => {
+                        this.startBehavior(state, behavior);
+                    }, 10);
+                }
+                //console.log("retry");
                 return;
             }
-
             //ready to walk
-            state.map.moveWall(this.x, this.y, this.direction);
             this.movingProgressRemaining = 16;
+            state.map.moveWall(this.x, this.y, this.direction);
             this.updateSprite();
         }
         if (behavior.type === "stand") {
-            //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
             //console.log("start behavior stand");
 
-            this.isStanding =true;
+            this.isStanding = true;
 
-            setTimeout(()=>{
-                utils.emitEvent("PersonStandComplete",{
+            setTimeout(() => {
+                utils.emitEvent("PersonStandComplete", {
                     whoId: this.id,
                 })
                 this.isStanding = false;
@@ -72,16 +76,16 @@ class Person extends GameObject {
 
     }
 
-    updatePosition() {
+    updatePosition(state) {
         const [property, change] = this.directionUpdate[this.direction];
         this[property] += change;
         this.movingProgressRemaining -= 1;
 
-        if(this.movingProgressRemaining === 0){
+        if (this.movingProgressRemaining === 0) {
             //finish walk
-            utils.emitEvent("PersonWalkingComplete",{
+            utils.emitEvent("PersonWalkingComplete", {
                 whoId: this.id,
-            })
+            });
         }
     }
 

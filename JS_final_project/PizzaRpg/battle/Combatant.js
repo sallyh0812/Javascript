@@ -31,8 +31,8 @@ class Combatant {
         return percent > 0 ? percent : 0;
     }
 
-    get giveXp(){
-        return this.level * 10;
+    get giveXp() {
+        return this.maxXp * this.level * 0.8;
     }
 
     get isActive() {
@@ -63,11 +63,16 @@ class Combatant {
         <p class="combatant_status"></p>
         `);
 
+        this.pizzaContainerElement = document.createElement("div");
+        this.pizzaContainerElement.classList.add("pizza-container");
+
         this.pizzaElement = document.createElement("img");
         this.pizzaElement.classList.add("pizza");
         this.pizzaElement.setAttribute("src", this.src);
         this.pizzaElement.setAttribute("alt", this.name);
         this.pizzaElement.setAttribute("data-team", this.team);
+
+        this.pizzaContainerElement.appendChild(this.pizzaElement);
 
         this.hpFills = this.hudElement.querySelectorAll(".combatant_life-container > rect");
         this.xpFills = this.hudElement.querySelectorAll(".combatant_xp-container > rect");
@@ -105,7 +110,7 @@ class Combatant {
 
     getPostEvents() {
         if (this.status?.type === "saucy") {
-            console.log(this,"suacy");
+            //console.log(this, "suacy");
             return [
                 { type: "textMessage", text: "Feeling Saucy!" },
                 { type: "stateChange", recover: 5, onCaster: true },
@@ -113,23 +118,33 @@ class Combatant {
         }
 
         if (this.status?.type === "clumsy") {
-            console.log(this,"clumsy");
+            //console.log(this, "clumsy");
             return [
                 { type: "textMessage", text: "Feeling Clumsy..." },
                 { type: "stateChange", damage: 5, onCaster: true },
             ]
         }
+        
+        if(this.status?.type === "spicy"){
+            return [
+                { type: "textMessage", text: "Feeling Spicy... (attack weakened)" },
+            ]
+        }
+
+        if(this.status?.type === "magic"){
+            return [
+                { type: "textMessage", text: "Feeling powerful!" },
+            ]
+        }
+
         return [];
     }
 
-    getReplacedEvents(originalEvents){
-        // if(this.status?.type === "clumsy" && utils.randomFromArray([true,false])){
-        //     //replace event
-        //     return [
-        //         {type: "textMessage", text: `${this.name} flops over`}
-        //     ]
-        // }
-        return originalEvents;
+    getReplacedEvents(originalAction) {
+        if(this.status?.type === "cheesy"){
+            return originalAction.fail || originalAction.success;
+        }
+        return originalAction.success;
     }
 
     decrementStatus() {
@@ -138,10 +153,16 @@ class Combatant {
             if (this.status.expiresIn === 0) {
                 let expiredStatus = this.status.type;
                 this.update({ status: null, });
-                return {
+                let expiredEvents = [{
                     type: "textMessage",
                     text: `No longer ${expiredStatus}!`,
-                };
+                }];
+                if (expiredStatus === "cheesy") {
+                    expiredEvents.push({
+                        type: "animation", animation: "uncover"
+                    },);
+                }
+                return expiredEvents;
             }
         }
         return null;
@@ -150,7 +171,7 @@ class Combatant {
     init(container) {
         this.createElement();
         container.appendChild(this.hudElement);
-        container.appendChild(this.pizzaElement);
+        container.appendChild(this.pizzaContainerElement);
         this.update();
     }
 

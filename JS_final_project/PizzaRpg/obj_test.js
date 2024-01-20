@@ -7,31 +7,33 @@ class GameObject {
         this.x = config.x || 0;
         this.y = config.y || 0;
         this.direction = config.direction || "down";
+        
         this.sprite = new Sprite({
             gameObject: this,
-            src: config.src || "./img/characters/people/hero.png",
+            useShadow: config.src ? true: false,
+            src: config.src,
         });
 
-        this.behaviorLoop = config.behaviorLoop ||[];
+        this.behaviorLoop = config.behaviorLoop || [];
         this.behaviorLoopIndex = 0;
 
         this.talking = config.talking || [];
     }
 
-    mount(map){
-        console.log("mount");
+    mount(map) {
+        //console.log("mount");
         this.isMounted = true;
         map.addWall(this.x, this.y);
 
         //if we have a behavior, kick off after a short delay
-        setTimeout(()=>{
+        setTimeout(() => {
             this.doBehaviorEvent(map);
-        },10)
+        }, 10)
     }
 
-    async doBehaviorEvent(map){
+    async doBehaviorEvent(map) {
         //sth more important
-        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding){
+        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
             return;
         }
 
@@ -41,22 +43,26 @@ class GameObject {
         eventConfig.who = this.id;
 
         //create an event instance out of our next event config
-        const eventHandler = new OverworldEvent({map, event: eventConfig});
+        const eventHandler = new OverworldEvent({ map, event: eventConfig });
         await eventHandler.init();
+
+        if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+            return;
+        }
 
         //setting the next event to fire
         this.behaviorLoopIndex += 1;
-        if (this.behaviorLoopIndex === this.behaviorLoop.length){
+        if (this.behaviorLoopIndex === this.behaviorLoop.length) {
             this.behaviorLoopIndex = 0;
         }
-
+        
         //do it again
         this.doBehaviorEvent(map);
     }
 
 
 
-    update(){
-        
+    update() {
+
     }
 }

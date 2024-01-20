@@ -22,7 +22,7 @@ class Overworld {
                     arrow: this.directionInput.direction,
                     map: this.map,
                 })
-            })
+            });
 
             //draw lower layer
             this.map.drawLowerImage(this.ctx, cameraPerson);
@@ -57,7 +57,7 @@ class Overworld {
         document.addEventListener("PersonWalkingComplete", e => {
 
             if (e.detail.whoId === 'hero') {
-                console.log("hero's position changed.")
+                //console.log("hero's position changed.")
                 this.map.checkForFootstepCutscene()
             }
         })
@@ -83,12 +83,11 @@ class Overworld {
         this.startGameLoop();
 
         this.map.startCutscene([
-            // {who: "npc1", type: "stand", direction:"down", time: 800},
-            // {type: "textMessage", text: "Hello welcome to Pizza Legend! Are you ready?"},
+            {type: "textMessage", text: "Hello welcome to Pizza Legend! (Enter to continue)"},
             // {type: "changeMap", map: "DemoRoom"},
-            {type: "battle"},
+            // {type: "battle", enemyId: "Jackie"},
         ]);
 
-        console.log("Hello from the Overworld!", this);
+        //console.log("Hello from the Overworld!", this);
     }
 }

@@ -28,7 +28,7 @@ window.BattleAnimatons = {
             </svg>
         `);
 
-        div.addEventListener("animationend", ()=>{
+        div.addEventListener("animationend", () => {
             div.remove();
         });
 
@@ -52,4 +52,56 @@ window.BattleAnimatons = {
         await utils.wait(100);
         onComplete();
     },
+
+    async cover(event, onComplete) {
+        const element = event.caster.pizzaElement;
+        const containerElement = event.caster.pizzaContainerElement;
+        const animationClassName = "cover";
+        let cheese = document.createElement("img");
+        cheese.classList.add("pizza");
+        cheese.classList.add("cheese");
+        cheese.setAttribute("src", '/img/icons/cheese.png');
+        cheese.setAttribute("data-team", "player");
+
+        containerElement.appendChild(cheese);
+
+        cheese.classList.add(animationClassName);
+
+        cheese.addEventListener("animationend", () => {
+            cheese.classList.remove("cover");
+        }, { once: true });
+
+        //continue battle cycle right around when the pizzas collide
+        await utils.wait(100);
+        onComplete();
+    },
+
+    async uncover(event, onComplete) {
+        const animationClassName = "uncover";
+        let cheese = document.querySelector(".cheese");
+        cheese.classList.add(animationClassName);
+
+        cheese.addEventListener("animationend", () => {
+            cheese.remove();
+        }, { once: true });
+
+        //continue battle cycle right around when the pizzas collide
+        await utils.wait(100);
+        onComplete();
+    },
+
+    async protect(event, onComplete) {
+        const animationClassName = "battle-damage-blink";
+        let cheese = document.querySelector(".cheese");
+        cheese.classList.add(animationClassName);
+
+        setTimeout(() => {
+            cheese.classList.remove("battle-damage-blink");
+        }, 900);
+
+        //continue battle cycle right around when the pizzas collide
+        await utils.wait(100);
+        onComplete();
+    },
+
 }

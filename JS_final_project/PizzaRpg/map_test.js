@@ -59,10 +59,13 @@ class OverworldMap {
 
         this.isCutscenePlaying = false;
 
+        //console.log("stop cut scene");
+
         //reset npc to do behavior
         Object.values(this.gameObjects).forEach(obj => {
             obj.doBehaviorEvent(this);
-        })
+        });
+        
     }
 
     checkForActionCutscene() {
@@ -72,7 +75,6 @@ class OverworldMap {
         const match = Object.values(this.gameObjects).find(obj => {
             return `${obj.x},${obj.y}` === `${nextCoords.x},${nextCoords.y}`
         });
-        console.log(match);
         if (match && match.talking.length && !this.isCutscenePlaying) {
             this.startCutscene(match.talking[0].events);
         }
@@ -97,6 +99,7 @@ class OverworldMap {
     }
 
     moveWall(wasX, wasY, direction) {
+        //console.log("move wall");
         this.removeWall(wasX, wasY);
         const { x, y } = utils.nextPosition(wasX, wasY, direction);
         this.addWall(x, y);
@@ -111,26 +114,30 @@ window.OverworldMaps = {
         gameObjects: {
             hero: new Person({
                 isPlayerControlled: true,
-                x: utils.withGrid(4),
-                y: utils.withGrid(5),
+                x: utils.withGrid(2),
+                y: utils.withGrid(4),
+                src: "./img/characters/people/hero.png",
             }),
             npc1: new Person({
-                x: utils.withGrid(6),
-                y: utils.withGrid(8),
+                x: utils.withGrid(4),
+                y: utils.withGrid(7),
                 src: "./img/characters/people/npc1.png",
                 behaviorLoop: [
+                    { type: "stand", direction: "down", time: 30 },
                     { type: "walk", direction: "left" },
+                    { type: "stand", direction: "left", time: 30 },
                     { type: "walk", direction: "up", },
                     { type: "stand", direction: "right", time: 500 },
                     { type: "stand", direction: "left", time: 500 },
                     { type: "walk", direction: "up", },
+                    { type: "stand", direction: "up", time: 30 },
                     { type: "walk", direction: "right" },
+                    { type: "stand", direction: "right", time: 30 },
                     { type: "walk", direction: "down" },
-                    { type: "stand", direction: "left", time: 500 },
                     { type: "stand", direction: "right", time: 500 },
                     { type: "stand", direction: "left", time: 500 },
                     { type: "walk", direction: "down" },
-
+                    
                 ],
                 talking: [
                     {
@@ -138,9 +145,10 @@ window.OverworldMaps = {
                             { type: "textMessage", text: "Finally... We need some help!", faceHero: "npc1" },
                             { type: "textMessage", text: "Go find and beat the bad guy in the kitchen..." },
                             { who: "npc1", type: "stand", direction: "down", time: 500 },
+                            //{ type: "battle", enemyId: "jane" },
                         ],
                     },
-                ]
+                ],
             }),
             npc2: new Person({
                 x: utils.withGrid(8),
@@ -159,7 +167,29 @@ window.OverworldMaps = {
                         ],
                     },
                 ]
-            })
+            }),
+            npc3: new Person({
+                x: utils.withGrid(5),
+                y: utils.withGrid(9),
+                src: "./img/characters/people/npc3.png",
+                behaviorLoop: [
+                    { type: "stand", direction: "up", time: 500 },
+                ],
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Where do you want to go?", faceHero: "npc3" },
+                            { type: "textMessage", text: "Hmm... the kitchen!" },
+                            { type: "textMessage", text: "It's dangerous there. You should be prepared for the battle" },
+                            { type: "textMessage", text: "Of course! I'm ready!" },
+                            { type: "battle", enemyId: "Bob" },
+                            { type: "textMessage", text: "Oh! You're the hero! Please help us save the kitchen..." },
+                            {who: "hero", type: "walk", direction: "up"},
+                            { who: "npc3", type: "walk", direction: "right"},
+                        ],
+                    },
+                ]
+            }), 
         },
         walls: {
             //"16,16":true,
@@ -217,6 +247,8 @@ window.OverworldMaps = {
             [utils.asGridCoords(5, 10)]: [
                 {
                     events: [
+                        { who: "npc1", type: "stand", direction: "down", time: 500},
+                        { who: "npc3", type: "stand", direction: "left", time: 500},
                         { type: "changeMap", map: "Kitchen" },
                     ]
                 }
@@ -244,30 +276,121 @@ window.OverworldMaps = {
                 isPlayerControlled: true,
                 x: utils.withGrid(3),
                 y: utils.withGrid(5),
+                useShadow: true,
+                src: "./img/characters/people/hero.png",
             }),
-            npc3: new Person({
+            jackie: new Person({
                 x: utils.withGrid(9),
                 y: utils.withGrid(8),
-                src: "./img/characters/people/npc3.png",
+                useShadow: true,
+                src: "./img/characters/people/erio.png",
                 behaviorLoop: [
-                    { type: "stand", direction: "down", time: 500 },
+                    { type: "stand", direction: "down", time: 300 },
                     { type: "walk", direction: "left" },
-                    { type: "stand", direction: "left", time: 300 },
-                    { type: "walk", direction: "up" },
-                    { type: "stand", direction: "up", time: 300 },
-                    { type: "walk", direction: "down" },
+                    { type: "stand", direction: "down", time: 300 },
                     { type: "walk", direction: "right" },
-                    { type: "stand", direction: "right", time: 300 },
 
                 ],
                 talking: [
                     {
                         events: [
-                            { type: "textMessage", text: "How did you find me!!!", faceHero: "npc3" },
-                            { type: "textMessage", text: "What have you done to the pizza paradise?", faceHero: "npc3" },
-                            { type: "textMessage", text: "Huh? My new flavor is the best!", faceHero: "npc3" },
-                            { type: "textMessage", text: "Let's Battle!", faceHero: "npc3" },
-                            { type: "battle" }
+                            { type: "textMessage", text: "How did you find me!!!", faceHero: "jackie" },
+                            { type: "textMessage", text: "What have you done to the pizza paradise?"},
+                            { type: "textMessage", text: "Huh? My new flavor is the best!"},
+                            { type: "textMessage", text: "Let's Battle!"},
+                            { type: "battle", enemyId: "Jackie" },
+                        ],
+                    },
+                ]
+            }),
+
+            fridge1: new GameObject({
+                x: utils.withGrid(11),
+                y: utils.withGrid(4),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Fridge"},
+                        ],
+                    },
+                ]
+            }),
+            fridge2: new GameObject({
+                x: utils.withGrid(12),
+                y: utils.withGrid(4),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Fridge"},
+                        ],
+                    },
+                ]
+            }),
+            box1: new GameObject({
+                x: utils.withGrid(1),
+                y: utils.withGrid(9),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Box"},
+                        ],
+                    },
+                ]
+            }),
+            box2: new GameObject({
+                x: utils.withGrid(2),
+                y: utils.withGrid(9),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Box"},
+                        ],
+                    },
+                ]
+            }),
+            stove1: new GameObject({
+                x: utils.withGrid(1),
+                y: utils.withGrid(5),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Stove"},
+                        ],
+                    },
+                ]
+            }),
+            stove2: new GameObject({
+                x: utils.withGrid(1),
+                y: utils.withGrid(6),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Stove"},
+                        ],
+                    },
+                ]
+            }),
+            stove3: new GameObject({
+                x: utils.withGrid(1),
+                y: utils.withGrid(7),
+                useShadow: false,
+                src: null,
+                talking: [
+                    {
+                        events: [
+                            { type: "textMessage", text: "Stove"},
                         ],
                     },
                 ]
@@ -305,6 +428,8 @@ window.OverworldMaps = {
             [utils.asGridCoords(8, 3)]: true,
             [utils.asGridCoords(9, 3)]: true,
             [utils.asGridCoords(10, 3)]: true,
+            [utils.asGridCoords(11, 4)]: true,
+            [utils.asGridCoords(12, 4)]: true,
 
             [utils.asGridCoords(1, 10)]: true,
             [utils.asGridCoords(2, 10)]: true,
@@ -318,12 +443,42 @@ window.OverworldMaps = {
             [utils.asGridCoords(10, 10)]: true,
             [utils.asGridCoords(11, 10)]: true,
             [utils.asGridCoords(12, 10)]: true,
+
+            [utils.asGridCoords(9, 9)]: true,
+            [utils.asGridCoords(10, 9)]: true,
+
+            [utils.asGridCoords(9, 7)]: true,
+            [utils.asGridCoords(10, 7)]: true,
+
+            [utils.asGridCoords(6, 7)]: true,
+            [utils.asGridCoords(7, 7)]: true,
         },
         cutsceneSpaces: {
             [utils.asGridCoords(5, 10)]: [
                 {
                     events: [
                         { type: "changeMap", map: "DemoRoom" },
+                    ]
+                }
+            ],
+            [utils.asGridCoords(2, 5)]: [
+                {
+                    events: [
+                        { type: "textMessage", text: "Pizza Stove" },
+                    ]
+                }
+            ],
+            [utils.asGridCoords(2, 6)]: [
+                {
+                    events: [
+                        { type: "textMessage", text: "Pizza Stove" },
+                    ]
+                }
+            ],
+            [utils.asGridCoords(2, 7)]: [
+                {
+                    events: [
+                        { type: "textMessage", text: "Pizza Stove" },
                     ]
                 }
             ],

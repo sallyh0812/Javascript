@@ -33,7 +33,7 @@ class BattleEvent {
             .replace("{TARGET}", this.event.target?.name)
             .replace("{ACTION}", this.event.action?.name)
 
-        console.log("battle message");
+        //console.log("battle message");
         const message = new TextMessage({
             text: text,
             onComplete: () => resolve(),
@@ -42,7 +42,7 @@ class BattleEvent {
     }
 
     submissionMenu(resolve) {
-        console.log("submission menu");
+        //console.log("submission menu");
         const { caster } = this.event;
         const menu = new SubmissionMenu({
             caster: this.event.caster,
@@ -60,7 +60,7 @@ class BattleEvent {
     }
 
     replacementMenu(resolve) {
-        console.log("replacement menu");
+        //console.log("replacement menu");
         const menu = new ReplacementMenu({
             replacements: Object.values(this.battle.combatants).filter(cmbt => {
                 return cmbt.team === this.event.team && cmbt.hp > 0;
@@ -79,12 +79,12 @@ class BattleEvent {
             if (getXp > 0) {
                 getXp -= 1;
                 combatant.xp += 1;
-                if(combatant.xp >= combatant.maxXp){
+                if (combatant.xp >= combatant.maxXp) {
                     combatant.level += 1;
                     combatant.xp = 0;
                     combatant.maxXp = 100; //for next level
                 }
-                
+
                 combatant.update();
                 requestAnimationFrame(step);
                 return;
@@ -95,14 +95,13 @@ class BattleEvent {
     }
 
     async replace(resolve) {
-        console.log("replace");
+        //console.log("replace");
         const { replacement } = this.event;
         const prevCmbt = this.battle.combatants[this.battle.activeCombatants[replacement.team]];
         //console.log("prevCmbt:",prevCmbt);
 
         this.battle.activeCombatants[replacement.team] = null;
         this.battle.activeCombatants[replacement.team] = replacement.id;
-
 
         this.battle.playerTeam.update();
         this.battle.enemyTeam.update();
@@ -118,20 +117,30 @@ class BattleEvent {
     async stateChange(resolve) {
         const { caster, target, damage, recover, status, action } = this.event;
         let who = this.event.onCaster ? caster : target;
+        let oppositeWho = this.event.onCaster ? target : caster;
 
         /*finished in SubmissionMenu.js menuSubmit
             if(action.targetType === "friendly"){
                 who = caster;
          }*/
 
-        if (damage) {
-            //modify target to have less hp
-            who.update({
-                hp: who.hp - damage,
-            });
-
+        if (damage && who.status?.type !== "cheesy") {
+            if (oppositeWho.status?.type === "spicy") {
+                //modify target to have less hp
+                who.update({
+                    hp: who.hp - Math.floor(damage*0.8),
+                });
+            }else if(oppositeWho.status?.type === "magic"){
+                who.update({
+                    hp: who.hp - Math.floor(damage*1.5),
+                });
+            } else {
+                who.update({
+                    hp: who.hp - damage,
+                });
+            }
             //start blinking
-            console.log(`who.name from battle_event stateChange ${who.name}`);
+            //console.log(`who.name from battle_event stateChange ${who.name}`);
             who.pizzaElement.classList.add("battle-damage-blink");
         }
 
@@ -141,9 +150,13 @@ class BattleEvent {
         }
 
         if (status) {
+            if (who.status?.type === "cheesy") {
+                let cheese = who.pizzaContainerElement.querySelector(".cheese");
+                cheese.remove();
+            }
             who.update({
                 status: { ...status },
-            })
+            });
         }
 
         if (status === null) {

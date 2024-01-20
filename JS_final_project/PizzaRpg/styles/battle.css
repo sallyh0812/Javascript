@@ -51,6 +51,38 @@
     animation: battle-damage-blink 0.3s steps(2, start) infinite;
 }
 
+.cover-circle{
+    position: absolute;
+    left: 43px;
+    top: 96px;
+}
+
+@keyframes cover{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.cover{
+    animation: cover 1s forwards;
+}
+
+@keyframes uncover{
+    0%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+.uncover{
+    animation: uncover 1s forwards;
+}
+
 @keyframes battle-spin-right {
     0% {
         transform: translate3d(0, 0, 0) rotate(0deg) scale(2);
